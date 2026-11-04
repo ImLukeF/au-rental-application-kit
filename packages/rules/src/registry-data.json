@@ -1,0 +1,1077 @@
+[
+  {
+    "id": "VIC.FORM.PRESCRIBED_FORM_3A",
+    "jurisdiction": "VIC",
+    "kind": "form",
+    "title": "Prescribed form 3a",
+    "summary": "Prescribed form 3a. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-03-31"
+    },
+    "params": {
+      "formId": "VIC-3A-2026-03-31",
+      "excludedProviders": ["homes_victoria", "registered_agency"],
+      "excludedPrograms": ["victorian_affordable_housing_program", "specialised_housing_program"]
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 30AC; Regs reg 14A; CAV applying page",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 60,
+      "bodyCorporatePU": 300
+    }
+  },
+  {
+    "id": "VIC.FORM.STATEMENT_FORM_3",
+    "jurisdiction": "VIC",
+    "kind": "statement",
+    "title": "Statement form 3",
+    "summary": "Statement form 3. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2021-03-29"
+    },
+    "params": {
+      "contentFile": "content/vic/form3-statement.md"
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 29C; Regs reg 14; CAV Form 3 docx",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "notes": "In force at least from 2021-03-29; exact earlier commencement UNVERIFIED."
+  },
+  {
+    "id": "VIC.COLLECT.ONLY_FORM_3A_INFO",
+    "jurisdiction": "VIC",
+    "kind": "collection_limit",
+    "title": "Only form 3a info",
+    "summary": "Only form 3a info. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-03-31"
+    },
+    "params": {
+      "allowedFieldPaths": [
+        "item1",
+        "item2",
+        "item3",
+        "item4",
+        "item5",
+        "item6",
+        "item7",
+        "item8",
+        "item9",
+        "item10",
+        "item11",
+        "item12"
+      ]
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 30C(1); Regs reg 15",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 60,
+      "bodyCorporatePU": 300
+    }
+  },
+  {
+    "id": "VIC.COLLECT.PRESCRIBED_CATEGORIES",
+    "jurisdiction": "VIC",
+    "kind": "collection_limit",
+    "title": "Prescribed categories",
+    "summary": "Prescribed categories. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-03-31"
+    },
+    "params": {
+      "identityItems": [4, 7],
+      "financialItems": [6],
+      "employmentItems": [5]
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 30BA; reg 14B",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "VIC.DOCS.FINANCIAL_MAX_TWO",
+    "jurisdiction": "VIC",
+    "kind": "document_limit",
+    "title": "Financial max two",
+    "summary": "Financial max two. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-03-31"
+    },
+    "params": {
+      "max": 2,
+      "allowed": ["payslip", "bank_statement_no_transactions", "centrelink_statement_or_letter"]
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "Form 3A item 6",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "VIC.DOCS.IDENTITY_MAX_TWO",
+    "jurisdiction": "VIC",
+    "kind": "document_limit",
+    "title": "Identity max two",
+    "summary": "Identity max two. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-03-31"
+    },
+    "params": {
+      "max": 2,
+      "allowed": [
+        "driver_licence",
+        "proof_of_age_card",
+        "medicare_card",
+        "australian_passport",
+        "foreign_passport_and_visa",
+        "birth_certificate",
+        "citizenship_certificate",
+        "tertiary_student_id",
+        "centrelink_card",
+        "dva_card",
+        "utilities_bill_current_address",
+        "government_letter_current_address"
+      ]
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "Form 3A item 7",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "VIC.DOCS.BANK_STATEMENT_NO_TRANSACTIONS",
+    "jurisdiction": "VIC",
+    "kind": "document_limit",
+    "title": "Bank statement no transactions",
+    "summary": "Bank statement no transactions. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-03-31"
+    },
+    "params": {
+      "uiWarning": true
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "Form 3A item 6; CAV applying page",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "VIC.USE.PURPOSE_LIMIT",
+    "jurisdiction": "VIC",
+    "kind": "purpose_limit",
+    "title": "Purpose limit",
+    "summary": "Purpose limit. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2021-03-29"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 30B",
+        "url": "https://www.legislation.vic.gov.au/in-force/acts/residential-tenancies-act-1997/115",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 60,
+      "bodyCorporatePU": 300
+    },
+    "notes": "In force at least from 2021-03-29; exact earlier commencement UNVERIFIED."
+  },
+  {
+    "id": "VIC.SECURITY.REASONABLE_STEPS",
+    "jurisdiction": "VIC",
+    "kind": "security",
+    "title": "Reasonable steps",
+    "summary": "Reasonable steps. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2025-11-25"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 505BB; CAV new-changes (date)",
+        "url": "https://www.legislation.vic.gov.au/in-force/acts/residential-tenancies-act-1997/115",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 60,
+      "bodyCorporatePU": 300
+    }
+  },
+  {
+    "id": "VIC.RETENTION.SUCCESSFUL_3Y",
+    "jurisdiction": "VIC",
+    "kind": "retention",
+    "title": "Successful 3y",
+    "summary": "Successful 3y. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2025-11-25"
+    },
+    "params": {
+      "yearsAfterTermination": 3
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 505BC(1)(a)",
+        "url": "https://www.legislation.vic.gov.au/in-force/acts/residential-tenancies-act-1997/115",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 60,
+      "bodyCorporatePU": 300
+    }
+  },
+  {
+    "id": "VIC.RETENTION.UNSUCCESSFUL_30D",
+    "jurisdiction": "VIC",
+    "kind": "retention",
+    "title": "Unsuccessful 30d",
+    "summary": "Unsuccessful 30d. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2025-11-25"
+    },
+    "params": {
+      "daysAfterAgreement": 30
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 505BC(1)(b)(i)",
+        "url": "https://www.legislation.vic.gov.au/in-force/acts/residential-tenancies-act-1997/115",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 60,
+      "bodyCorporatePU": 300
+    }
+  },
+  {
+    "id": "VIC.RETENTION.UNSUCCESSFUL_CONSENT_6M",
+    "jurisdiction": "VIC",
+    "kind": "retention",
+    "title": "Unsuccessful consent 6m",
+    "summary": "Unsuccessful consent 6m. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2025-11-25"
+    },
+    "params": {
+      "monthsAfterAgreement": 6,
+      "requiresWrittenConsent": true
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 505BC(1)(b)(ii)",
+        "url": "https://www.legislation.vic.gov.au/in-force/acts/residential-tenancies-act-1997/115",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 60,
+      "bodyCorporatePU": 300
+    }
+  },
+  {
+    "id": "VIC.RETENTION.EXCEPTIONS",
+    "jurisdiction": "VIC",
+    "kind": "informational",
+    "title": "Exceptions",
+    "summary": "Exceptions. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2025-11-25"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 505BC(2)–(3)",
+        "url": "https://www.legislation.vic.gov.au/in-force/acts/residential-tenancies-act-1997/115",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "VIC.DISCLOSE.WRITTEN_CONSENT",
+    "jurisdiction": "VIC",
+    "kind": "disclosure",
+    "title": "Written consent",
+    "summary": "Written consent. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2025-11-25"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 505BD",
+        "url": "https://www.legislation.vic.gov.au/in-force/acts/residential-tenancies-act-1997/115",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 60,
+      "bodyCorporatePU": 300
+    }
+  },
+  {
+    "id": "VIC.PRIVACY.RELATIONSHIP_OTHER_LAWS",
+    "jurisdiction": "VIC",
+    "kind": "informational",
+    "title": "Relationship other laws",
+    "summary": "Relationship other laws. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2025-11-25"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 505BE",
+        "url": "https://www.legislation.vic.gov.au/in-force/acts/residential-tenancies-act-1997/115",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "VIC.DB.DISCLOSE_IN_FORM",
+    "jurisdiction": "VIC",
+    "kind": "notice",
+    "title": "Disclose in form",
+    "summary": "Disclose in form. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-03-31"
+    },
+    "params": {
+      "maxRows": 3
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "Form 3A item 11",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "VIC.DB.LISTING_NOTICE_7D",
+    "jurisdiction": "VIC",
+    "kind": "notice",
+    "title": "Listing notice 7d",
+    "summary": "Listing notice 7d. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2021-03-29"
+    },
+    "params": {
+      "daysAfterUse": 7
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 439D(2)",
+        "url": "https://www.legislation.vic.gov.au/in-force/acts/residential-tenancies-act-1997/115",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 60
+    },
+    "notes": "In force at least from 2021-03-29; exact earlier commencement UNVERIFIED."
+  },
+  {
+    "id": "VIC.FEES.THIRD_PARTY_BAN",
+    "jurisdiction": "VIC",
+    "kind": "fee",
+    "title": "Third party ban",
+    "summary": "Third party ban. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-03-31",
+      "to": "2026-10-12"
+    },
+    "params": {
+      "appliesTo": ["third_party"],
+      "matters": [
+        "application",
+        "background_check",
+        "tenancy_history_check",
+        "credit_check",
+        "database_check",
+        "identity_verification",
+        "administrative",
+        "failed_payment",
+        "rent_payment"
+      ]
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "CAV new-changes; reg 21C",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "notes": "Pre-13-Oct s 51A wording and penalty UNVERIFIED. Agents/providers return unknown before 13 Oct 2026."
+  },
+  {
+    "id": "VIC.FEES.ALL_PERSONS_EXCEPT_ADI_BAN",
+    "jurisdiction": "VIC",
+    "kind": "fee",
+    "title": "All persons except adi ban",
+    "summary": "All persons except adi ban. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-10-13"
+    },
+    "params": {
+      "appliesTo": ["third_party", "agent", "provider"],
+      "exempt": ["adi"],
+      "matters": [
+        "application",
+        "background_check",
+        "tenancy_history_check",
+        "credit_check",
+        "database_check",
+        "identity_verification",
+        "administrative",
+        "failed_payment",
+        "rent_payment"
+      ]
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "RTA s 51A (v115); reg 21C; CAV new-changes",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary",
+    "penalty": {
+      "individualPU": 80,
+      "bodyCorporatePU": 400
+    }
+  },
+  {
+    "id": "VIC.FORM.SEPARATE_FORM_PER_ADULT",
+    "jurisdiction": "VIC",
+    "kind": "informational",
+    "title": "Separate form per adult",
+    "summary": "Separate form per adult. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-03-31"
+    },
+    "params": {
+      "minAge": 18
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Act 1997 (Vic) / Residential Tenancies Regulations 2021",
+        "pinpoint": "Form 3A preamble",
+        "url": "https://www.legislation.vic.gov.au/in-force/statutory-rules/residential-tenancies-regulations-2021/009",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "VIC.PENALTY_UNIT.2026_27",
+    "jurisdiction": "VIC",
+    "kind": "informational",
+    "title": "2026 27",
+    "summary": "2026 27. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2026-07-01",
+      "to": "2027-06-30"
+    },
+    "params": {
+      "valueAUD": 209.1
+    },
+    "citations": [
+      {
+        "instrument": "Victorian penalty unit value",
+        "pinpoint": "Financial year 2026_27",
+        "url": "https://www.vic.gov.au/notice-under-section-6-fixing-value-fee-unit-and-penalty-unit-5",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "government_release",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "VIC.PENALTY_UNIT.2025_26",
+    "jurisdiction": "VIC",
+    "kind": "informational",
+    "title": "2025 26",
+    "summary": "2025 26. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "2025-07-01",
+      "to": "2026-06-30"
+    },
+    "params": {
+      "valueAUD": 203.51
+    },
+    "citations": [
+      {
+        "instrument": "Victorian penalty unit value",
+        "pinpoint": "Financial year 2025_26",
+        "url": "https://www.vic.gov.au/notice-under-section-6-fixing-value-fee-unit-and-penalty-unit-5",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "secondary",
+        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+      }
+    ],
+    "confidence": "verified_secondary"
+  },
+  {
+    "id": "NSW.CURRENT.NO_APPLICATION_FEES_S23",
+    "jurisdiction": "NSW",
+    "kind": "fee",
+    "title": "No application fees s23",
+    "summary": "No application fees s23. ",
+    "commencement": {
+      "kind": "guidance"
+    },
+    "params": {
+      "allowedPreAgreement": ["holding_fee", "rent", "bond", "registration_fee"]
+    },
+    "citations": [
+      {
+        "instrument": "NSW Fair Trading Commissioner guidance",
+        "pinpoint": "When a prospective tenant applies for a property",
+        "url": "https://www.nsw.gov.au/housing-and-construction/rental-forms-surveys-and-data/resources/fair-trading-commissioners-guidance/when-a-prospective-tenant-applies-for-a-property",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "regulator_guidance"
+      }
+    ],
+    "confidence": "verified_secondary"
+  },
+  {
+    "id": "NSW.GUIDANCE.SIGHT_ID_DONT_STORE",
+    "jurisdiction": "NSW",
+    "kind": "id_timing",
+    "title": "Sight id dont store",
+    "summary": "Sight id dont store. ",
+    "commencement": {
+      "kind": "guidance"
+    },
+    "params": {
+      "deleteAfterVerification": true
+    },
+    "citations": [
+      {
+        "instrument": "NSW Fair Trading Commissioner guidance",
+        "pinpoint": "When a prospective tenant applies for a property",
+        "url": "https://www.nsw.gov.au/housing-and-construction/rental-forms-surveys-and-data/resources/fair-trading-commissioners-guidance/when-a-prospective-tenant-applies-for-a-property",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "regulator_guidance"
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "NSW.GUIDANCE.REDACT_BANK_TRANSACTIONS",
+    "jurisdiction": "NSW",
+    "kind": "document_limit",
+    "title": "Redact bank transactions",
+    "summary": "Redact bank transactions. ",
+    "commencement": {
+      "kind": "guidance"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "NSW Fair Trading Commissioner guidance",
+        "pinpoint": "When a prospective tenant applies for a property",
+        "url": "https://www.nsw.gov.au/housing-and-construction/rental-forms-surveys-and-data/resources/fair-trading-commissioners-guidance/when-a-prospective-tenant-applies-for-a-property",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "regulator_guidance"
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "NSW.GUIDANCE.MINIMUM_NECESSARY",
+    "jurisdiction": "NSW",
+    "kind": "collection_limit",
+    "title": "Minimum necessary",
+    "summary": "Minimum necessary. ",
+    "commencement": {
+      "kind": "guidance"
+    },
+    "params": {
+      "excluded": [
+        "marital_status",
+        "bond_claim_history",
+        "dispute_history",
+        "credit_report",
+        "non_lessee_employment"
+      ]
+    },
+    "citations": [
+      {
+        "instrument": "NSW Fair Trading Commissioner guidance",
+        "pinpoint": "When a prospective tenant applies for a property",
+        "url": "https://www.nsw.gov.au/housing-and-construction/rental-forms-surveys-and-data/resources/fair-trading-commissioners-guidance/when-a-prospective-tenant-applies-for-a-property",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "regulator_guidance"
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "NSW.PPI.APPS_APPLY",
+    "jurisdiction": "NSW",
+    "kind": "security",
+    "title": "Apps apply",
+    "summary": "Apps apply. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "commencement": {
+      "kind": "pending_proclamation",
+      "configKey": "NSW_PPI_COMMENCEMENT_DATE"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Amendment (Protection of Personal Information) Bill 2025 (NSW), Legislative Assembly second print",
+        "pinpoint": "ss 210, 210A(2)–(5)",
+        "url": "https://www.parliament.nsw.gov.au/bill/files/18774/Second%20Print.pdf",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "bill",
+        "versionNote": "Archived 2026-03-15. Final Act and Legislative Council amendments UNVERIFIED."
+      }
+    ],
+    "confidence": "unverified",
+    "penalty": {
+      "individualPU": 100,
+      "otherwisePU": 450
+    },
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  },
+  {
+    "id": "NSW.PPI.ENTITY_DEFINITION",
+    "jurisdiction": "NSW",
+    "kind": "informational",
+    "title": "Entity definition",
+    "summary": "Entity definition. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "commencement": {
+      "kind": "pending_proclamation",
+      "configKey": "NSW_PPI_COMMENCEMENT_DATE"
+    },
+    "params": {
+      "includesTenantEngagedServices": true
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Amendment (Protection of Personal Information) Bill 2025 (NSW), Legislative Assembly second print",
+        "pinpoint": "s 210A(1)",
+        "url": "https://www.parliament.nsw.gov.au/bill/files/18774/Second%20Print.pdf",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "bill",
+        "versionNote": "Archived 2026-03-15. Final Act and Legislative Council amendments UNVERIFIED."
+      }
+    ],
+    "confidence": "unverified",
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  },
+  {
+    "id": "NSW.PPI.DIRECT_COLLECTION",
+    "jurisdiction": "NSW",
+    "kind": "collection_limit",
+    "title": "Direct collection",
+    "summary": "Direct collection. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "commencement": {
+      "kind": "pending_proclamation",
+      "configKey": "NSW_PPI_COMMENCEMENT_DATE"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Amendment (Protection of Personal Information) Bill 2025 (NSW), Legislative Assembly second print",
+        "pinpoint": "s 210C",
+        "url": "https://www.parliament.nsw.gov.au/bill/files/18774/Second%20Print.pdf",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "bill",
+        "versionNote": "Archived 2026-03-15. Final Act and Legislative Council amendments UNVERIFIED."
+      }
+    ],
+    "confidence": "unverified",
+    "penalty": {
+      "individualPU": 50,
+      "otherwisePU": 200
+    },
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  },
+  {
+    "id": "NSW.PPI.APPROVED_FORM",
+    "jurisdiction": "NSW",
+    "kind": "form",
+    "title": "Approved form",
+    "summary": "Approved form. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "commencement": {
+      "kind": "pending_proclamation",
+      "configKey": "NSW_PPI_COMMENCEMENT_DATE"
+    },
+    "params": {
+      "formId": null,
+      "provisionalFormId": "NSW-PROVISIONAL-2026-11-04"
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Amendment (Protection of Personal Information) Bill 2025 (NSW), Legislative Assembly second print",
+        "pinpoint": "s 210D(1)",
+        "url": "https://www.parliament.nsw.gov.au/bill/files/18774/Second%20Print.pdf",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "bill",
+        "versionNote": "Archived 2026-03-15. Final Act and Legislative Council amendments UNVERIFIED."
+      }
+    ],
+    "confidence": "unverified",
+    "penalty": {
+      "individualPU": 50,
+      "otherwisePU": 300
+    },
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  },
+  {
+    "id": "NSW.PPI.INSPECT_BEFORE_APPLY",
+    "jurisdiction": "NSW",
+    "kind": "inspection",
+    "title": "Inspect before apply",
+    "summary": "Inspect before apply. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "commencement": {
+      "kind": "pending_proclamation",
+      "configKey": "NSW_PPI_COMMENCEMENT_DATE"
+    },
+    "params": {
+      "writtenStatementExceptions": ["unable", "does_not_wish"]
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Amendment (Protection of Personal Information) Bill 2025 (NSW), Legislative Assembly second print",
+        "pinpoint": "s 210D(2)–(3)",
+        "url": "https://www.parliament.nsw.gov.au/bill/files/18774/Second%20Print.pdf",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "bill",
+        "versionNote": "Archived 2026-03-15. Final Act and Legislative Council amendments UNVERIFIED."
+      }
+    ],
+    "confidence": "unverified",
+    "penalty": {
+      "individualPU": 50,
+      "otherwisePU": 200
+    },
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  },
+  {
+    "id": "NSW.PPI.ID_AFTER_INTENT_NOTICE",
+    "jurisdiction": "NSW",
+    "kind": "id_timing",
+    "title": "Id after intent notice",
+    "summary": "Id after intent notice. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "commencement": {
+      "kind": "pending_proclamation",
+      "configKey": "NSW_PPI_COMMENCEMENT_DATE"
+    },
+    "params": {
+      "requiresIntent": true,
+      "requiresPriorWrittenNotice": true
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Amendment (Protection of Personal Information) Bill 2025 (NSW), Legislative Assembly second print",
+        "pinpoint": "s 210E; s 209",
+        "url": "https://www.parliament.nsw.gov.au/bill/files/18774/Second%20Print.pdf",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "bill",
+        "versionNote": "Archived 2026-03-15. Final Act and Legislative Council amendments UNVERIFIED."
+      }
+    ],
+    "confidence": "unverified",
+    "penalty": {
+      "individualPU": 50,
+      "otherwisePU": 200
+    },
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  },
+  {
+    "id": "NSW.PPI.IMPROPER_COLLECTION_DESTROY_2BD",
+    "jurisdiction": "NSW",
+    "kind": "retention",
+    "title": "Improper collection destroy 2bd",
+    "summary": "Improper collection destroy 2bd. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "commencement": {
+      "kind": "pending_proclamation",
+      "configKey": "NSW_PPI_COMMENCEMENT_DATE"
+    },
+    "params": {
+      "businessDays": 2
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Amendment (Protection of Personal Information) Bill 2025 (NSW), Legislative Assembly second print",
+        "pinpoint": "s 210F",
+        "url": "https://www.parliament.nsw.gov.au/bill/files/18774/Second%20Print.pdf",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "bill",
+        "versionNote": "Archived 2026-03-15. Final Act and Legislative Council amendments UNVERIFIED."
+      }
+    ],
+    "confidence": "unverified",
+    "penalty": {
+      "individualPU": 50,
+      "otherwisePU": 200
+    },
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  },
+  {
+    "id": "NSW.PPI.REGULATIONS_PENDING",
+    "jurisdiction": "NSW",
+    "kind": "informational",
+    "title": "Regulations pending",
+    "summary": "Regulations pending. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "commencement": {
+      "kind": "pending_proclamation",
+      "configKey": "NSW_PPI_COMMENCEMENT_DATE"
+    },
+    "params": {
+      "topics": [
+        "info_types",
+        "documents",
+        "doc_count",
+        "tenant_choice",
+        "digital_id",
+        "security",
+        "retention_max",
+        "access_correction",
+        "records"
+      ]
+    },
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Amendment (Protection of Personal Information) Bill 2025 (NSW), Legislative Assembly second print",
+        "pinpoint": "s 218A",
+        "url": "https://www.parliament.nsw.gov.au/bill/files/18774/Second%20Print.pdf",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "bill",
+        "versionNote": "Archived 2026-03-15. Final Act and Legislative Council amendments UNVERIFIED."
+      }
+    ],
+    "confidence": "unverified",
+    "penalty": {
+      "individualPU": 450
+    },
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  },
+  {
+    "id": "NSW.PPI.TRIBUNAL_ORDERS",
+    "jurisdiction": "NSW",
+    "kind": "informational",
+    "title": "Tribunal orders",
+    "summary": "Tribunal orders. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "commencement": {
+      "kind": "pending_proclamation",
+      "configKey": "NSW_PPI_COMMENCEMENT_DATE"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "Residential Tenancies Amendment (Protection of Personal Information) Bill 2025 (NSW), Legislative Assembly second print",
+        "pinpoint": "s 210G",
+        "url": "https://www.parliament.nsw.gov.au/bill/files/18774/Second%20Print.pdf",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "bill",
+        "versionNote": "Archived 2026-03-15. Final Act and Legislative Council amendments UNVERIFIED."
+      }
+    ],
+    "confidence": "unverified",
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  },
+  {
+    "id": "NSW.PENALTY_UNIT",
+    "jurisdiction": "NSW",
+    "kind": "informational",
+    "title": "Penalty unit",
+    "summary": "Penalty unit. ",
+    "commencement": {
+      "kind": "fixed",
+      "from": "1999-01-01"
+    },
+    "params": {
+      "valueAUD": 110
+    },
+    "citations": [
+      {
+        "instrument": "Crimes (Sentencing Procedure) Act 1999 (NSW)",
+        "pinpoint": "s 17 (UNVERIFIED primary text)",
+        "url": "https://legislation.nsw.gov.au/view/html/inforce/current/act-1999-092#sec.17",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "secondary"
+      }
+    ],
+    "confidence": "verified_secondary"
+  },
+  {
+    "id": "CTH.PRIVACY.COVERAGE_THRESHOLD",
+    "jurisdiction": "CTH",
+    "kind": "informational",
+    "title": "Coverage threshold",
+    "summary": "Coverage threshold. ",
+    "commencement": {
+      "kind": "guidance"
+    },
+    "params": {
+      "turnoverAUD": 3000000,
+      "alwaysCovered": ["residential_tenancy_database_operator"]
+    },
+    "citations": [
+      {
+        "instrument": "Privacy Act 1988 (Cth) / OAIC tenancy guidance",
+        "pinpoint": "Tenancy: organisations covered",
+        "url": "https://www.oaic.gov.au/privacy/your-privacy-rights/more-privacy-rights/tenancy",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "regulator_guidance"
+      }
+    ],
+    "confidence": "verified_primary"
+  },
+  {
+    "id": "CTH.APP.11_2_DESTROY_WHEN_NOT_NEEDED",
+    "jurisdiction": "CTH",
+    "kind": "retention",
+    "title": "11 2 destroy when not needed",
+    "summary": "11 2 destroy when not needed. ",
+    "commencement": {
+      "kind": "guidance"
+    },
+    "params": {},
+    "citations": [
+      {
+        "instrument": "Privacy Act 1988 (Cth) / OAIC tenancy guidance",
+        "pinpoint": "Sch 1 APP 11.2",
+        "url": "https://www.legislation.gov.au/C2004A03712/latest/text",
+        "checkedOn": "2026-11-04",
+        "sourceKind": "legislation"
+      }
+    ],
+    "confidence": "unverified",
+    "notes": "UNVERIFIED against final Act text; NSW rules use the Legislative Assembly second print. Commonwealth APP text was not fetched by the planner."
+  }
+]
