@@ -1,0 +1,37 @@
+{
+  "schemaVersion": "aurak.listing-public.v1",
+  "slug": "abcdefghijkl",
+  "jurisdiction": "NSW",
+  "formId": "NSW-PROVISIONAL-2026-11-04",
+  "provisional": true,
+  "status": "open",
+  "item1": {
+    "premisesAddress": "0 Placeholder Crescent, Fixtureville"
+  },
+  "item2": {
+    "name": "Example Agency (fixture)",
+    "acnOrAbn": "000000000",
+    "address": "0 Placeholder Street, Fixtureville",
+    "phone": "0491 570 157",
+    "email": "agent@example.com",
+    "providerStateOrTerritory": "NSW"
+  },
+  "financialRequested": [
+    "proof_of_savings"
+  ],
+  "identityRequested": [
+    "driver_licence"
+  ],
+  "identityStage": "preferred",
+  "maxFinancialDocs": 1,
+  "refereesRequested": false,
+  "tenancyDatabases": [],
+  "collectionNoticeMd": "Example Agency (fixture) collects Form 3A information only to assess this property application. It may share information with the rental provider and with consent, referees and listed databases. Cloudflare storage may be outside Australia. Unsuccessful applications are destroyed 14 days after agreement, successful applications after a 30-day handoff. Use the portal for access, correction or withdrawal. Contact the agency, then the relevant regulator about complaints.",
+  "privacyPolicyUrl": null,
+  "retentionSummary": {
+    "unsuccessfulDays": 14,
+    "successfulHandoffDays": 30
+  },
+  "turnstileSiteKey": null,
+  "rulesVersion": "FIXTURE_REPLACED_AT_TEST_TIME"
+}
