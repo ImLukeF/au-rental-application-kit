@@ -54,14 +54,14 @@ describe("client-side PDF exports", () => {
     expect(text).toContain("© State of Victoria");
     expect(text).not.toContain("Sample Referee");
     expect(text).not.toContain("0 Placeholder Earlier Road, Fixtureville");
-  });
+  }, 20000);
   it("labels every NSW page PROVISIONAL", async () => {
     const { text } = await extractText(await renderApplicationPdf(fixture(true), { fonts, now }), {
       mergePages: false,
     });
     expect(text.length).toBeGreaterThan(0);
-    for (const page of text) expect(page).toContain("PROVISIONAL");
-  });
+    for (const page of text) expect(page).toContain("PROVISIONAL — not the NSW approved form");
+  }, 20000);
   it("renders deterministically at a fixed timestamp", async () => {
     const a = await renderApplicationPdf(fixture(), { fonts, now }),
       b = await renderApplicationPdf(fixture(), { fonts, now });

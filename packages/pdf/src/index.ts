@@ -1,5 +1,13 @@
 import type { ApplicationExportV1 } from "@aurak/forms";
-import { applicationSchema, DISCLAIMER, NSW_PROVISIONAL_BANNER, VIC_ITEMS } from "@aurak/forms";
+import {
+  applicationSchema,
+  DISCLAIMER,
+  FINANCIAL_LABELS,
+  IDENTITY_LABELS,
+  NSW_PROVISIONAL_BANNER,
+  VIC_ITEMS,
+} from "@aurak/forms";
+import { VIC_IDENTITY } from "@aurak/rules";
 import fontkit from "@pdf-lib/fontkit";
 import { PDFDocument, type PDFFont, type PDFPage, rgb } from "pdf-lib";
 import statement from "../../../content/vic/form3-statement.md?raw";
@@ -22,8 +30,8 @@ export async function renderApplicationPdf(
   pdf.setTitle(
     payload.jurisdiction === "VIC" ? "Residential rental application" : "NSW PROVISIONAL rental application",
   );
-  const regular = await pdf.embedFont(opts.fonts.regular, { subset: true });
-  const bold = await pdf.embedFont(opts.fonts.bold, { subset: true });
+  const regular = await pdf.embedFont(opts.fonts.regular, { subset: false });
+  const bold = await pdf.embedFont(opts.fonts.bold, { subset: false });
   const glyphs = new Set(regular.getCharacterSet());
   let missing = false;
   let page: PDFPage;
@@ -79,7 +87,10 @@ export async function renderApplicationPdf(
     y -= 5;
   }
   function field(label: string, value: unknown) {
-    line(label, bold, 10);
+    // Keep a wrapped label and its first value together when a page fills.
+    const labelLines = wrap(label, bold, 10, A4[0] - 2 * margin);
+    if (y < 92 + labelLines.length * 15) newPage();
+    for (const labelLine of labelLines) line(labelLine, bold, 10);
     const text =
       value === null || value === undefined
         ? "Not requested"
@@ -119,7 +130,7 @@ export async function renderApplicationPdf(
           field("Net weekly income", `$${(v / 100).toFixed(2)}`);
         else objectFields(v, prefix ? `${prefix} · ${fieldLabels[key] ?? key}` : (fieldLabels[key] ?? key));
       }
-    } else field(prefix, String(value));
+    } else field(prefix, documentLabels[String(value)] ?? String(value));
   }
   newPage();
   if (payload.jurisdiction === "VIC") {
@@ -132,6 +143,8 @@ export async function renderApplicationPdf(
     line("PART A—GENERAL", bold, 14);
     const a = payload.applicant;
     for (const item of VIC_ITEMS) {
+      // Leave room for the heading and the first field beneath it.
+      if (y < 140) newPage();
       line(`${item.number}. ${item.label}`, bold, 14);
       switch (item.number) {
         case 1:
@@ -162,12 +175,17 @@ export async function renderApplicationPdf(
         case 6:
           field(
             "Requested financial documents",
-            payload.listing.item6Requested.join(", ") || "Not requested",
+            payload.listing.item6Requested.map((type) => documentLabels[type] ?? type).join(", ") ||
+              "Not requested",
           );
           objectFields(a.item6);
           break;
         case 7:
-          field("Requested identity documents", payload.listing.item7Requested.join(", ") || "Not requested");
+          field(
+            "Requested identity documents",
+            payload.listing.item7Requested.map((type) => documentLabels[type] ?? type).join(", ") ||
+              "Not requested",
+          );
           objectFields(a.item7);
           break;
         case 11:
@@ -211,7 +229,36 @@ export async function renderApplicationPdf(
   }
   return pdf.save({ useObjectStreams: false });
 }
+const documentLabels: Record<string, string> = {
+  ...FINANCIAL_LABELS,
+  ...Object.fromEntries(VIC_IDENTITY.map((id, i) => [id, IDENTITY_LABELS[i]!])),
+};
 const fieldLabels: Record<string, string> = {
+  item1: "Premises",
+  premisesAddress: "Address of premises",
+  item2: "Rental provider or agent",
+  item6Requested: "Requested financial documents",
+  item7Requested: "Requested identity documents",
+  item11: "Tenancy databases",
+  occupants: "Occupants",
+  total: "Total number of occupants",
+  applicant: "Applicant",
+  employment: "Employment",
+  financialEvidence: "Financial evidence",
+  documents: "Documents",
+  noRegularIncomeDetails: "Other details about ability to pay rent",
+  rentalHistory: "Rental history",
+  property1: "Current or most recent property",
+  property2: "Previous property",
+  references: "References",
+  lease: "Lease",
+  desiredTerm: "Desired lease term",
+  inspection: "Inspection",
+  status: "Status",
+  inspectedOn: "Inspection date",
+  writtenStatement: "Written statement",
+  declaration: "Declaration",
+  signatureMethod: "Signature method",
   name: "Full name or company name of rental provider or their agent",
   acnOrAbn: "ACN (or ABN if not a registered company)",
   address: "Address",
