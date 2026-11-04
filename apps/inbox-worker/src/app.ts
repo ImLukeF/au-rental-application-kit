@@ -1,4 +1,4 @@
-import { base64url, decrypt, fromBase64url, randomBytes, randomToken, sha256 } from "@aurak/crypto";
+import { base64url, decryptBytes, fromBase64url, randomBytes, randomToken, sha256 } from "@aurak/crypto";
 import type { ApplicationExportV1 } from "@aurak/forms";
 import {
   agencySchema,
@@ -763,9 +763,9 @@ export function createApp(deps: Dependencies = {}) {
     if (!obj) throw new HttpError(410, "document_unavailable");
     const ciphertext = new Uint8Array(await obj.arrayBuffer());
     if ((await sha256(ciphertext)) !== doc.ct_sha256) throw new HttpError(500, "document_integrity_error");
-    const bytes = await decrypt(
+    const bytes = await decryptBytes(
       await applicationKey(c.env, row.id),
-      { iv: doc.iv, ct: base64url(ciphertext) },
+      { iv: doc.iv, bytes: ciphertext },
       aad(row.id, `doc:${doc.id}`),
     );
     await audit(

@@ -4,7 +4,8 @@ export function randomBytes(size: number): Uint8Array<ArrayBuffer> {
 }
 export function base64url(bytes: Uint8Array): string {
   let binary = "";
-  for (const b of bytes) binary += String.fromCharCode(b);
+  for (let offset = 0; offset < bytes.length; offset += 8192)
+    binary += String.fromCharCode(...bytes.subarray(offset, offset + 8192));
   return btoa(binary).replaceAll("+", "-").replaceAll("/", "_").replace(/=+$/, "");
 }
 export function fromBase64url(value: string): Uint8Array<ArrayBuffer> {
@@ -60,27 +61,42 @@ export interface Encrypted {
   iv: string;
   ct: string;
 }
-export async function encrypt(key: CryptoKey, value: Uint8Array, aad: string): Promise<Encrypted> {
+export interface EncryptedBytes {
+  iv: string;
+  bytes: Uint8Array<ArrayBuffer>;
+}
+export async function encryptBytes(key: CryptoKey, value: Uint8Array, aad: string): Promise<EncryptedBytes> {
   const iv = randomBytes(12);
   const ct = await crypto.subtle.encrypt(
     { name: "AES-GCM", iv, additionalData: encoder.encode(aad) },
     key,
     copy(value),
   );
-  return { iv: base64url(iv), ct: base64url(new Uint8Array(ct)) };
+  return { iv: base64url(iv), bytes: new Uint8Array(ct) };
 }
-export async function decrypt(
+export async function decryptBytes(
   key: CryptoKey,
-  value: Encrypted,
+  value: EncryptedBytes,
   aad: string,
 ): Promise<Uint8Array<ArrayBuffer>> {
   return new Uint8Array(
     await crypto.subtle.decrypt(
       { name: "AES-GCM", iv: fromBase64url(value.iv), additionalData: encoder.encode(aad) },
       key,
-      fromBase64url(value.ct),
+      value.bytes,
     ),
   );
+}
+export async function encrypt(key: CryptoKey, value: Uint8Array, aad: string): Promise<Encrypted> {
+  const result = await encryptBytes(key, value, aad);
+  return { iv: result.iv, ct: base64url(result.bytes) };
+}
+export async function decrypt(
+  key: CryptoKey,
+  value: Encrypted,
+  aad: string,
+): Promise<Uint8Array<ArrayBuffer>> {
+  return decryptBytes(key, { iv: value.iv, bytes: fromBase64url(value.ct) }, aad);
 }
 export function encryptJson(key: CryptoKey, value: unknown, aad: string): Promise<Encrypted> {
   return encrypt(key, encoder.encode(JSON.stringify(value)), aad);

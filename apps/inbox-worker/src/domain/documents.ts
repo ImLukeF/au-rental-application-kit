@@ -1,4 +1,4 @@
-import { encrypt, fromBase64url, sha256 } from "@aurak/crypto";
+import { encryptBytes, sha256 } from "@aurak/crypto";
 import type { DocumentRef } from "@aurak/forms";
 import { computeRetention, type ISODate, type RetentionPolicy } from "@aurak/rules";
 import { aad, applicationKey, seal } from "../crypto/envelope";
@@ -25,12 +25,12 @@ export async function persistDocument(
   )
     throw new HttpError(422, "document_manifest_mismatch");
   const id = crypto.randomUUID();
-  const encrypted = await encrypt(
+  const encrypted = await encryptBytes(
     await applicationKey(env, applicationId),
     bytes,
     aad(applicationId, `doc:${id}`),
   );
-  const ciphertext = fromBase64url(encrypted.ct);
+  const ciphertext = encrypted.bytes;
   const key = `docs/${applicationId}/${id}`;
   const ctHash = await sha256(ciphertext);
   await env.DOCS.put(key, ciphertext, {
