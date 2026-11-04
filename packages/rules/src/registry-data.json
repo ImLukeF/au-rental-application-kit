@@ -4,7 +4,7 @@
     "jurisdiction": "VIC",
     "kind": "form",
     "title": "Prescribed form 3a",
-    "summary": "Prescribed form 3a. ",
+    "summary": "Use Form 3A for supported residential rental applications. Listed social and specialised housing exclusions are unsupported.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-03-31"
@@ -35,7 +35,7 @@
     "jurisdiction": "VIC",
     "kind": "statement",
     "title": "Statement form 3",
-    "summary": "Statement form 3. ",
+    "summary": "Include the prescribed Statement of Information for Rental Applicants with the application.",
     "commencement": {
       "kind": "fixed",
       "from": "2021-03-29"
@@ -61,7 +61,7 @@
     "jurisdiction": "VIC",
     "kind": "collection_limit",
     "title": "Only form 3a info",
-    "summary": "Only form 3a info. ",
+    "summary": "Request only information set out in Form 3A; agencies cannot add custom questions.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-03-31"
@@ -103,7 +103,7 @@
     "jurisdiction": "VIC",
     "kind": "collection_limit",
     "title": "Prescribed categories",
-    "summary": "Prescribed categories. ",
+    "summary": "Identity information is in items 4 and 7, employment in item 5 and financial information in item 6.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-03-31"
@@ -130,7 +130,7 @@
     "jurisdiction": "VIC",
     "kind": "document_limit",
     "title": "Financial max two",
-    "summary": "Financial max two. ",
+    "summary": "Request no more than two permitted financial document types, without duplicates.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-03-31"
@@ -156,7 +156,7 @@
     "jurisdiction": "VIC",
     "kind": "document_limit",
     "title": "Identity max two",
-    "summary": "Identity max two. ",
+    "summary": "Request no more than two identity documents from the form’s twelve permitted types.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-03-31"
@@ -195,7 +195,7 @@
     "jurisdiction": "VIC",
     "kind": "document_limit",
     "title": "Bank statement no transactions",
-    "summary": "Bank statement no transactions. ",
+    "summary": "Bank statements supplied under item 6 must exclude transaction details.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-03-31"
@@ -220,7 +220,7 @@
     "jurisdiction": "VIC",
     "kind": "purpose_limit",
     "title": "Purpose limit",
-    "summary": "Purpose limit. ",
+    "summary": "Use application information only to assess renter suitability or as otherwise required by the Act.",
     "commencement": {
       "kind": "fixed",
       "from": "2021-03-29"
@@ -248,7 +248,7 @@
     "jurisdiction": "VIC",
     "kind": "security",
     "title": "Reasonable steps",
-    "summary": "Reasonable steps. ",
+    "summary": "Take reasonable steps to prevent misuse, loss and unauthorised access, modification or disclosure.",
     "commencement": {
       "kind": "fixed",
       "from": "2025-11-25"
@@ -275,7 +275,7 @@
     "jurisdiction": "VIC",
     "kind": "retention",
     "title": "Successful 3y",
-    "summary": "Successful 3y. ",
+    "summary": "Destroy or permanently de-identify successful applicants’ information within three years after tenancy termination.",
     "commencement": {
       "kind": "fixed",
       "from": "2025-11-25"
@@ -304,7 +304,7 @@
     "jurisdiction": "VIC",
     "kind": "retention",
     "title": "Unsuccessful 30d",
-    "summary": "Unsuccessful 30d. ",
+    "summary": "Destroy or permanently de-identify unsuccessful applicants’ information within thirty days after the agreement is entered into.",
     "commencement": {
       "kind": "fixed",
       "from": "2025-11-25"
@@ -333,7 +333,7 @@
     "jurisdiction": "VIC",
     "kind": "retention",
     "title": "Unsuccessful consent 6m",
-    "summary": "Unsuccessful consent 6m. ",
+    "summary": "Written consent for other-premises use permits a six-month period after agreement. Keeping longer is optional, never the default.",
     "commencement": {
       "kind": "fixed",
       "from": "2025-11-25"
@@ -363,7 +363,7 @@
     "jurisdiction": "VIC",
     "kind": "informational",
     "title": "Exceptions",
-    "summary": "Exceptions. ",
+    "summary": "Statutory exceptions need professional review; the kit does not provide a general legal-hold override.",
     "commencement": {
       "kind": "fixed",
       "from": "2025-11-25"
@@ -386,7 +386,7 @@
     "jurisdiction": "VIC",
     "kind": "disclosure",
     "title": "Written consent",
-    "summary": "Written consent. ",
+    "summary": "Disclosure requires written consent or another ground listed in the Act.",
     "commencement": {
       "kind": "fixed",
       "from": "2025-11-25"
@@ -413,7 +413,7 @@
     "jurisdiction": "VIC",
     "kind": "informational",
     "title": "Relationship other laws",
-    "summary": "Relationship other laws. ",
+    "summary": "Corresponding obligations under other listed privacy laws may affect the operation of these state provisions.",
     "commencement": {
       "kind": "fixed",
       "from": "2025-11-25"
@@ -436,7 +436,7 @@
     "jurisdiction": "VIC",
     "kind": "notice",
     "title": "Disclose in form",
-    "summary": "Disclose in form. ",
+    "summary": "Identify tenancy databases used in item 11; Form 3A provides up to three rows.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-03-31"
@@ -461,7 +461,7 @@
     "jurisdiction": "VIC",
     "kind": "notice",
     "title": "Listing notice 7d",
-    "summary": "Listing notice 7d. ",
+    "summary": "If a tenancy database lists the applicant, give the prescribed written notice as soon as possible and within seven days after use.",
     "commencement": {
       "kind": "fixed",
       "from": "2021-03-29"
@@ -490,7 +490,7 @@
     "jurisdiction": "VIC",
     "kind": "fee",
     "title": "Third party ban",
-    "summary": "Third party ban. ",
+    "summary": "Third-party application fees are prohibited from 31 March 2026. Historical agent/provider treatment is UNVERIFIED.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-03-31",
@@ -508,7 +508,8 @@
         "administrative",
         "failed_payment",
         "rent_payment"
-      ]
+      ],
+      "unknownFor": ["agent", "provider"]
     },
     "citations": [
       {
@@ -528,7 +529,7 @@
     "jurisdiction": "VIC",
     "kind": "fee",
     "title": "All persons except adi ban",
-    "summary": "All persons except adi ban. ",
+    "summary": "From 13 October 2026 the encoded fee ban covers prescribed application and rent-payment matters, with the statutory ADI exception.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-10-13"
@@ -569,7 +570,7 @@
     "jurisdiction": "VIC",
     "kind": "informational",
     "title": "Separate form per adult",
-    "summary": "Separate form per adult. ",
+    "summary": "Each prospective renter aged eighteen or over may be asked to complete a separate application.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-03-31"
@@ -594,7 +595,7 @@
     "jurisdiction": "VIC",
     "kind": "informational",
     "title": "2026 27",
-    "summary": "2026 27. ",
+    "summary": "The Victorian penalty-unit value is $209.10 for the 2026–27 financial year.",
     "commencement": {
       "kind": "fixed",
       "from": "2026-07-01",
@@ -620,7 +621,7 @@
     "jurisdiction": "VIC",
     "kind": "informational",
     "title": "2025 26",
-    "summary": "2025 26. ",
+    "summary": "The historical Victorian penalty-unit value was $203.51 for 2025–26; secondary source.",
     "commencement": {
       "kind": "fixed",
       "from": "2025-07-01",
@@ -631,12 +632,12 @@
     },
     "citations": [
       {
-        "instrument": "Victorian penalty unit value",
-        "pinpoint": "Financial year 2025_26",
-        "url": "https://www.vic.gov.au/notice-under-section-6-fixing-value-fee-unit-and-penalty-unit-5",
+        "instrument": "Sentencing Advisory Council, Fine",
+        "pinpoint": "Penalty Units, Table 1: 2025–26",
+        "url": "https://www.sentencingcouncil.vic.gov.au/about-sentencing/fine",
         "checkedOn": "2026-11-04",
         "sourceKind": "secondary",
-        "versionNote": "Act v115 (2026-10-13); Regulations v009 (2026-06-30); plan transcription."
+        "versionNote": "Checked 2026-11-04; historical value corroborated by the Council table."
       }
     ],
     "confidence": "verified_secondary"
@@ -646,7 +647,7 @@
     "jurisdiction": "NSW",
     "kind": "fee",
     "title": "No application fees s23",
-    "summary": "No application fees s23. ",
+    "summary": "Current regulator guidance prohibits application, credit and background-check fees outside permitted pre-agreement charges. Primary s 23 wording UNVERIFIED.",
     "commencement": {
       "kind": "guidance"
     },
@@ -669,7 +670,7 @@
     "jurisdiction": "NSW",
     "kind": "id_timing",
     "title": "Sight id dont store",
-    "summary": "Sight id dont store. ",
+    "summary": "Guidance favours sighting identity documents without keeping copies; delete copies promptly after verification.",
     "commencement": {
       "kind": "guidance"
     },
@@ -692,7 +693,7 @@
     "jurisdiction": "NSW",
     "kind": "document_limit",
     "title": "Redact bank transactions",
-    "summary": "Redact bank transactions. ",
+    "summary": "Redact daily bank transactions before sharing financial evidence.",
     "commencement": {
       "kind": "guidance"
     },
@@ -713,7 +714,7 @@
     "jurisdiction": "NSW",
     "kind": "collection_limit",
     "title": "Minimum necessary",
-    "summary": "Minimum necessary. ",
+    "summary": "Collect only reasonably necessary information; avoid excessive documents and intrusive or irrelevant questions.",
     "commencement": {
       "kind": "guidance"
     },
@@ -742,7 +743,7 @@
     "jurisdiction": "NSW",
     "kind": "security",
     "title": "Apps apply",
-    "summary": "Apps apply. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "summary": "The second print applies the Australian Privacy Principles to residential tenancy entities. PROVISIONAL; final Act wording and commencement UNVERIFIED.",
     "commencement": {
       "kind": "pending_proclamation",
       "configKey": "NSW_PPI_COMMENCEMENT_DATE"
@@ -770,7 +771,7 @@
     "jurisdiction": "NSW",
     "kind": "informational",
     "title": "Entity definition",
-    "summary": "Entity definition. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "summary": "The second-print definition includes services engaged by tenants to hold and share their information. PROVISIONAL; final Act wording and commencement UNVERIFIED.",
     "commencement": {
       "kind": "pending_proclamation",
       "configKey": "NSW_PPI_COMMENCEMENT_DATE"
@@ -796,7 +797,7 @@
     "jurisdiction": "NSW",
     "kind": "collection_limit",
     "title": "Direct collection",
-    "summary": "Direct collection. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "summary": "Offer direct collection from the applicant; indirect collection requires consent or another permitted basis. PROVISIONAL; final Act wording and commencement UNVERIFIED.",
     "commencement": {
       "kind": "pending_proclamation",
       "configKey": "NSW_PPI_COMMENCEMENT_DATE"
@@ -824,7 +825,7 @@
     "jurisdiction": "NSW",
     "kind": "form",
     "title": "Approved form",
-    "summary": "Approved form. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "summary": "The approved application form and regulations were not published at the plan’s check date. This kit supplies only a provisional schema. PROVISIONAL; final Act wording and commencement UNVERIFIED.",
     "commencement": {
       "kind": "pending_proclamation",
       "configKey": "NSW_PPI_COMMENCEMENT_DATE"
@@ -855,7 +856,7 @@
     "jurisdiction": "NSW",
     "kind": "inspection",
     "title": "Inspect before apply",
-    "summary": "Inspect before apply. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "summary": "Require inspection before accepting an application, or the applicant’s written statement that they are unable or do not wish to inspect. PROVISIONAL; final Act wording and commencement UNVERIFIED.",
     "commencement": {
       "kind": "pending_proclamation",
       "configKey": "NSW_PPI_COMMENCEMENT_DATE"
@@ -885,7 +886,7 @@
     "jurisdiction": "NSW",
     "kind": "id_timing",
     "title": "Id after intent notice",
-    "summary": "Id after intent notice. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "summary": "Collect identity verification documents only from a preferred applicant after a prior written notice of intent to enter an agreement. PROVISIONAL; final Act wording and commencement UNVERIFIED.",
     "commencement": {
       "kind": "pending_proclamation",
       "configKey": "NSW_PPI_COMMENCEMENT_DATE"
@@ -916,7 +917,7 @@
     "jurisdiction": "NSW",
     "kind": "retention",
     "title": "Improper collection destroy 2bd",
-    "summary": "Improper collection destroy 2bd. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "summary": "Do not use improperly collected information; the second print requires destruction within two business days of awareness. Kit policy is immediate. PROVISIONAL; final Act wording and commencement UNVERIFIED.",
     "commencement": {
       "kind": "pending_proclamation",
       "configKey": "NSW_PPI_COMMENCEMENT_DATE"
@@ -946,7 +947,7 @@
     "jurisdiction": "NSW",
     "kind": "informational",
     "title": "Regulations pending",
-    "summary": "Regulations pending. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "summary": "Document types, maximum retention and other detailed requirements depend on regulations that remain unverified or unpublished. PROVISIONAL; final Act wording and commencement UNVERIFIED.",
     "commencement": {
       "kind": "pending_proclamation",
       "configKey": "NSW_PPI_COMMENCEMENT_DATE"
@@ -985,7 +986,7 @@
     "jurisdiction": "NSW",
     "kind": "informational",
     "title": "Tribunal orders",
-    "summary": "Tribunal orders. PROVISIONAL; applied early as best practice; not yet in force. Final Act UNVERIFIED.",
+    "summary": "The second print allows Tribunal orders concerning collection, access, correction, disclosure, destruction and de-identification. PROVISIONAL; final Act wording and commencement UNVERIFIED.",
     "commencement": {
       "kind": "pending_proclamation",
       "configKey": "NSW_PPI_COMMENCEMENT_DATE"
@@ -1009,7 +1010,7 @@
     "jurisdiction": "NSW",
     "kind": "informational",
     "title": "Penalty unit",
-    "summary": "Penalty unit. ",
+    "summary": "NSW uses a $110 penalty unit in the plan’s secondary-source account. Primary statutory text UNVERIFIED.",
     "commencement": {
       "kind": "fixed",
       "from": "1999-01-01"
@@ -1033,7 +1034,7 @@
     "jurisdiction": "CTH",
     "kind": "informational",
     "title": "Coverage threshold",
-    "summary": "Coverage threshold. ",
+    "summary": "OAIC guidance describes the general turnover threshold and coverage of tenancy database operators regardless of turnover.",
     "commencement": {
       "kind": "guidance"
     },
@@ -1057,7 +1058,7 @@
     "jurisdiction": "CTH",
     "kind": "retention",
     "title": "11 2 destroy when not needed",
-    "summary": "11 2 destroy when not needed. ",
+    "summary": "APP 11.2 concerns destroying or de-identifying personal information no longer needed. Primary text UNVERIFIED in the plan.",
     "commencement": {
       "kind": "guidance"
     },

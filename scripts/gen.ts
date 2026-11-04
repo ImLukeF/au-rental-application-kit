@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { mkdir, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { POLICIES } from "../packages/rules/src/policies";
 import data from "../packages/rules/src/registry-data.json";
 
 const output = process.argv.filter((arg) => arg !== "--")[2] ?? ".";
@@ -11,7 +12,9 @@ async function write(file: string, text: string) {
 }
 await write(
   "packages/rules/src/version.ts",
-  `export const registryVersion = "sha256:${createHash("sha256").update(JSON.stringify(data)).digest("hex")}";\n`,
+  `export const registryVersion = "sha256:${createHash("sha256")
+    .update(JSON.stringify({ rules: data, policies: POLICIES }))
+    .digest("hex")}";\n`,
 );
 await write(
   "docs/rules.md",

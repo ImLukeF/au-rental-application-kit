@@ -146,6 +146,7 @@ ruleTest("VIC.DB.LISTING_NOTICE_7D", "applies the cited parameters and commencem
 ruleTest("VIC.FEES.THIRD_PARTY_BAN", "applies the cited parameters and commencement", () => {
   expect(getRule("VIC.FEES.THIRD_PARTY_BAN").params).toEqual({
     appliesTo: ["third_party"],
+    unknownFor: ["agent", "provider"],
     matters: [
       "application",
       "background_check",

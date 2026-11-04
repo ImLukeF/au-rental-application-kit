@@ -1,3 +1,4 @@
+import { jurisdictionPolicy } from "./policies";
 import { activeRules, getRule } from "./registry";
 import type {
   EngineOptions,
@@ -51,54 +52,48 @@ export function validateListingRequest(
   _opts?: EngineOptions,
 ): Violation[] {
   const v: Violation[] = [];
-  const vic = input.jurisdiction === "VIC";
-  const fin: readonly string[] = vic ? VIC_FINANCIAL : NSW_FINANCIAL;
-  const ids: readonly string[] = vic ? VIC_IDENTITY : NSW_IDENTITY;
+  const policy = jurisdictionPolicy(input.jurisdiction);
+  const fin = policy.financial.allowed;
+  const ids = policy.identity.allowed;
   const add = (path: string, ruleId: string, reason: string) => v.push({ path, ruleId, reason });
   if (
     input.financialRequested.some((t) => !fin.includes(t)) ||
-    input.financialRequested.length > 2 ||
+    input.financialRequested.length > policy.financial.max ||
     new Set(input.financialRequested).size !== input.financialRequested.length ||
     input.maxFinancialDocs < 0 ||
-    input.maxFinancialDocs > 2 ||
+    input.maxFinancialDocs > policy.financial.max ||
     !Number.isInteger(input.maxFinancialDocs) ||
-    (vic && input.financialRequested.length > input.maxFinancialDocs)
+    (policy.identity.allowApplicationStage && input.financialRequested.length > input.maxFinancialDocs)
   )
     add(
       "financialRequested",
-      vic ? "VIC.DOCS.FINANCIAL_MAX_TWO" : "NSW.GUIDANCE.MINIMUM_NECESSARY",
+      policy.financial.ruleId,
       "Only permitted document types; at most two, without duplicates.",
     );
   if (
-    input.identityRequested.length > 2 ||
+    input.identityRequested.length > policy.identity.max ||
     input.identityRequested.some((t) => !ids.includes(t)) ||
     new Set(input.identityRequested).size !== input.identityRequested.length
   )
     add(
       "identityRequested",
-      vic ? "VIC.DOCS.IDENTITY_MAX_TWO" : "NSW.PPI.REGULATIONS_PENDING",
+      policy.identity.ruleId,
       "Request at most two permitted identity document types.",
     );
-  if (!vic && input.identityStage !== "preferred")
+  if (!policy.identity.allowApplicationStage && input.identityStage !== "preferred")
     add(
       "identityStage",
-      "NSW.PPI.ID_AFTER_INTENT_NOTICE",
+      policy.identity.timingRuleId,
       "NSW identity collection is only after a prior written intent notice. PROVISIONAL.",
     );
-  if (input.tenancyDatabases.length > 3)
-    add(
-      "tenancyDatabases",
-      vic ? "VIC.DB.DISCLOSE_IN_FORM" : "NSW.GUIDANCE.MINIMUM_NECESSARY",
-      "At most three tenancy databases.",
-    );
-  const form = getRule("VIC.FORM.PRESCRIBED_FORM_3A");
+  if (input.tenancyDatabases.length > policy.database.max)
+    add("tenancyDatabases", policy.database.discloseRuleId, "At most three tenancy databases.");
   if (
-    vic &&
-    [...(form.params.excludedProviders as string[]), ...(form.params.excludedPrograms as string[])].some(
+    [...policy.excludedProviders, ...policy.excludedPrograms].some(
       (t) => t === input.providerType || t === input.programType,
     )
   )
-    add("providerType", form.id, "Use not supported for excluded providers or housing programs.");
+    add("providerType", policy.formRuleId, "Use not supported for excluded providers or housing programs.");
   return v;
 }
 export function canCollectIdentityDocuments(
@@ -111,9 +106,10 @@ export function canCollectIdentityDocuments(
   _on: ISODate,
   _opts?: EngineOptions,
 ): { allowed: boolean; ruleIds: string[]; reason?: string } {
-  const ruleId = ctx.jurisdiction === "NSW" ? "NSW.PPI.ID_AFTER_INTENT_NOTICE" : "VIC.DOCS.IDENTITY_MAX_TWO";
+  const policy = jurisdictionPolicy(ctx.jurisdiction);
+  const ruleId = policy.identity.timingRuleId;
   const atApplication =
-    ctx.jurisdiction === "VIC" &&
+    policy.identity.allowApplicationStage &&
     ctx.listingIdentityStage === "application" &&
     ctx.applicationStatus === "submitted";
   const invited =
@@ -153,24 +149,26 @@ export function evaluateFee(input: {
   ruleIds: string[];
   note?: string;
 } {
-  if (input.jurisdiction === "NSW")
+  const policy = jurisdictionPolicy(input.jurisdiction);
+  if (policy.fees.guidanceRuleId && policy.fees.guidanceProhibited)
     return {
       result: "prohibited",
-      ruleIds: ["NSW.CURRENT.NO_APPLICATION_FEES_S23"],
-      note: "Regulator guidance; s 23 wording UNVERIFIED.",
+      ruleIds: [policy.fees.guidanceRuleId],
+      ...(policy.fees.note ? { note: policy.fees.note } : {}),
     };
-  if (input.chargedBy === "adi")
-    return { result: "not_prohibited_by_encoded_rules", ruleIds: ["VIC.FEES.ALL_PERSONS_EXCEPT_ADI_BAN"] };
-  if (input.on >= "2026-10-13")
-    return { result: "prohibited", ruleIds: ["VIC.FEES.ALL_PERSONS_EXCEPT_ADI_BAN"] };
-  if (input.on >= "2026-03-31")
-    return input.chargedBy === "third_party"
-      ? { result: "prohibited", ruleIds: ["VIC.FEES.THIRD_PARTY_BAN"] }
-      : {
-          result: "unknown",
-          ruleIds: ["VIC.FEES.THIRD_PARTY_BAN"],
-          note: "Form 3A Part B item 3 states no application fees; pre-13-Oct s 51A wording not reviewed: UNVERIFIED",
-        };
+  const applicable = activeRules(input.jurisdiction, input.on).filter((r) => r.kind === "fee");
+  for (const r of applicable) {
+    const params = r.params;
+    if ((params.exempt as string[] | undefined)?.includes(input.chargedBy))
+      return { result: "not_prohibited_by_encoded_rules", ruleIds: [r.id] };
+    if (
+      (params.appliesTo as string[] | undefined)?.includes(input.chargedBy) &&
+      (params.matters as string[] | undefined)?.includes(input.matter)
+    )
+      return { result: "prohibited", ruleIds: [r.id] };
+    if ((params.unknownFor as string[] | undefined)?.includes(input.chargedBy))
+      return { result: "unknown", ruleIds: [r.id], note: r.notes ?? "UNVERIFIED historical rule wording." };
+  }
   return { result: "not_prohibited_by_encoded_rules", ruleIds: [] };
 }
 export function requiredNotices(
@@ -184,17 +182,21 @@ export function requiredNotices(
   _opts?: EngineOptions,
 ) {
   const notices: { type: string; ruleId: string; dueAt: string | null; beforeCollection: boolean }[] = [];
-  if (ctx.jurisdiction === "VIC" && ctx.databaseListingFound && ctx.dbCheckedAt)
+  const policy = jurisdictionPolicy(ctx.jurisdiction);
+  if (policy.database.noticeRuleId && ctx.databaseListingFound && ctx.dbCheckedAt)
     notices.push({
       type: "vic_439d_database_listing",
-      ruleId: "VIC.DB.LISTING_NOTICE_7D",
-      dueAt: new Date(new Date(ctx.dbCheckedAt).getTime() + 7 * 86400000).toISOString(),
+      ruleId: policy.database.noticeRuleId!,
+      dueAt: new Date(
+        new Date(ctx.dbCheckedAt).getTime() +
+          Number(getRule(policy.database.noticeRuleId!).params.daysAfterUse) * 86400000,
+      ).toISOString(),
       beforeCollection: false,
     });
-  if (ctx.jurisdiction === "NSW" && ctx.collectingIdentity)
+  if (!policy.identity.allowApplicationStage && ctx.collectingIdentity)
     notices.push({
       type: "nsw_210e_intent",
-      ruleId: "NSW.PPI.ID_AFTER_INTENT_NOTICE",
+      ruleId: policy.identity.timingRuleId,
       dueAt: null,
       beforeCollection: true,
     });
@@ -217,7 +219,7 @@ export function excludedInformationCatalogue(j: Jurisdiction) {
     "Pet details",
   ].map((path) => ({
     path,
-    ruleId: j === "VIC" ? "VIC.COLLECT.ONLY_FORM_3A_INFO" : "NSW.GUIDANCE.MINIMUM_NECESSARY",
+    ruleId: jurisdictionPolicy(j === "CTH" ? "NSW" : j).collectionRuleId,
     reason: "Not requested or not permitted by this form.",
   }));
 }

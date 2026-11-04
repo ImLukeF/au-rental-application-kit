@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { addBusinessDays, addDays, addMonths, addYears, deadline } from "./dates";
+import { jurisdictionPolicy, ruleParameter } from "./policies";
 import type {
   EngineOptions,
   ISODate,
@@ -30,7 +31,9 @@ export function validateRetentionPolicy(policy: RetentionPolicy, j: Jurisdiction
     : [
         {
           path: "retentionPolicy",
-          ruleId: j === "VIC" ? "VIC.RETENTION.UNSUCCESSFUL_30D" : "NSW.PPI.REGULATIONS_PENDING",
+          ruleId:
+            jurisdictionPolicy(j).retention.unsuccessfulRuleId ??
+            jurisdictionPolicy(j).retention.fallbackRuleId,
           reason:
             "Policy exceeds legal safety margin or kit cap (28 unsuccessful days; 7 withdrawn/identity days; 90 handoff days).",
         },
@@ -47,18 +50,18 @@ export function computeRetention(
   if (errors.length) throw new Error(errors[0]!.ruleId);
   let legal: string | null = null;
   let due: string;
-  let rule = j === "VIC" ? "VIC.RETENTION.EXCEPTIONS" : "NSW.PPI.REGULATIONS_PENDING";
+  const cfg = jurisdictionPolicy(j).retention;
+  let rule = cfg.fallbackRuleId;
   switch (event.kind) {
     case "unsuccessful": {
       due = deadline(addDays(event.agreementDate, policy.unsuccessfulDays));
-      if (j === "VIC") {
-        rule = event.vicOtherPremisesConsent
-          ? "VIC.RETENTION.UNSUCCESSFUL_CONSENT_6M"
-          : "VIC.RETENTION.UNSUCCESSFUL_30D";
+      if (cfg.unsuccessfulRuleId) {
+        rule =
+          event.vicOtherPremisesConsent && cfg.consentedRuleId ? cfg.consentedRuleId : cfg.unsuccessfulRuleId;
         legal = deadline(
           event.vicOtherPremisesConsent
-            ? addMonths(event.agreementDate, 6)
-            : addDays(event.agreementDate, 30),
+            ? addMonths(event.agreementDate, ruleParameter(rule, "monthsAfterAgreement") ?? 0)
+            : addDays(event.agreementDate, ruleParameter(rule, "daysAfterAgreement") ?? 0),
         );
         if (event.vicOtherPremisesConsent && policy.keepConsentedUnsuccessful) due = legal;
       }
@@ -66,9 +69,10 @@ export function computeRetention(
     }
     case "successful":
       due = deadline(addDays(event.agreementDate, policy.successfulHandoffDays));
-      if (j === "VIC") {
-        rule = "VIC.RETENTION.SUCCESSFUL_3Y";
-        if (event.tenancyEndDate) legal = deadline(addYears(event.tenancyEndDate, 3));
+      if (cfg.successfulRuleId) {
+        rule = cfg.successfulRuleId;
+        if (event.tenancyEndDate)
+          legal = deadline(addYears(event.tenancyEndDate, ruleParameter(rule, "yearsAfterTermination") ?? 0));
       }
       break;
     case "listing_withdrawn_no_agreement":
@@ -78,7 +82,7 @@ export function computeRetention(
       due = new Date(new Date(event.withdrawnAt).getTime() + policy.withdrawnDays * 86400000).toISOString();
       break;
     case "identity_document": {
-      rule = j === "NSW" ? "NSW.GUIDANCE.SIGHT_ID_DONT_STORE" : "VIC.SECURITY.REASONABLE_STEPS";
+      rule = cfg.identityRuleId;
       due = new Date(
         Math.min(
           new Date(event.uploadedAt).getTime() + policy.identityDocMaxDays * 86400000,
@@ -90,8 +94,10 @@ export function computeRetention(
       break;
     }
     case "improperly_collected":
-      rule = j === "NSW" ? "NSW.PPI.IMPROPER_COLLECTION_DESTROY_2BD" : "VIC.SECURITY.REASONABLE_STEPS";
-      legal = j === "NSW" ? addBusinessDays(event.awareAt, 2) : null;
+      rule = cfg.improperRuleId ?? cfg.identityRuleId;
+      legal = cfg.improperRuleId
+        ? addBusinessDays(event.awareAt, ruleParameter(cfg.improperRuleId, "businessDays") ?? 0)
+        : null;
       due = event.awareAt;
       break;
   }
