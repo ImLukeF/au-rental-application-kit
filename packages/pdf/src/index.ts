@@ -114,8 +114,11 @@ export async function renderApplicationPdf(
       return;
     }
     if (typeof value === "object") {
-      for (const [key, v] of Object.entries(value))
-        objectFields(v, prefix ? `${prefix} · ${fieldLabels[key] ?? key}` : (fieldLabels[key] ?? key));
+      for (const [key, v] of Object.entries(value)) {
+        if (key === "netWeeklyIncomeCents" && typeof v === "number")
+          field("Net weekly income", `$${(v / 100).toFixed(2)}`);
+        else objectFields(v, prefix ? `${prefix} · ${fieldLabels[key] ?? key}` : (fieldLabels[key] ?? key));
+      }
     } else field(prefix, String(value));
   }
   newPage();
@@ -135,7 +138,26 @@ export async function renderApplicationPdf(
           field("Address of premises", payload.listing.item1.premisesAddress);
           break;
         case 2:
-          objectFields(payload.listing.item2);
+          field("Full name or company name of rental provider or their agent", payload.listing.item2.name);
+          field("ACN (or ABN if not a registered company)", payload.listing.item2.acnOrAbn);
+          field("Address", payload.listing.item2.address);
+          field("Phone number", payload.listing.item2.phone);
+          field("Email address", payload.listing.item2.email);
+          field(
+            "Australian State or Territory in which the rental provider resides",
+            payload.listing.item2.providerStateOrTerritory,
+          );
+          break;
+        case 4:
+          for (const key of [
+            "fullName",
+            "dateOfBirth",
+            "currentAddress",
+            "postcode",
+            "phone",
+            "email",
+          ] as const)
+            field(fieldLabels[key]!, a.item4[key]);
           break;
         case 6:
           field(
@@ -152,7 +174,9 @@ export async function renderApplicationPdf(
           objectFields(payload.listing.item11, "Tenancy databases");
           break;
         case 12:
-          objectFields(a.item12);
+          field("Print name", a.item12.printName);
+          field("Signature", a.item12.signature);
+          field("Date", a.item12.date);
           paragraph(
             "I understand that my application may not be processed unless all required documents are submitted.",
           );
