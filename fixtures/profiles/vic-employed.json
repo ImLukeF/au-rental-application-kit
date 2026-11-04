@@ -1,0 +1,49 @@
+{
+  "personal": {
+    "fullName": "Test Applicant One",
+    "dateOfBirth": "1990-01-01",
+    "phone": "0491 570 006",
+    "email": "applicant1@example.com"
+  },
+  "addresses": [
+    {
+      "address": "Unit 0, 0 Placeholder Street, Fixtureville",
+      "postcode": "0000",
+      "from": "2024-01-01",
+      "isCurrent": true
+    },
+    {
+      "address": "0 Placeholder Avenue, Fixtureville",
+      "postcode": "0000",
+      "from": "2020-01-01",
+      "to": "2023-12-31",
+      "isCurrent": false
+    },
+    {
+      "address": "0 Placeholder Earlier Road, Fixtureville",
+      "postcode": "0000",
+      "from": "2018-01-01",
+      "to": "2019-12-31",
+      "isCurrent": false
+    }
+  ],
+  "employment": {
+    "status": "employed",
+    "employer": "Example Employer (fixture)",
+    "employerAddress": "0 Placeholder Road, Fixtureville",
+    "netWeeklyIncomeCents": 100000
+  },
+  "referees": [
+    {
+      "name": "Sample Referee",
+      "phone": "0491 570 156",
+      "email": "referee@example.com",
+      "connection": "Personal referee"
+    }
+  ],
+  "preferences": {
+    "desiredLeaseTerm": "12 months",
+    "preferredMoveInDate": "2026-11-20"
+  },
+  "occupantsDefault": 1
+}

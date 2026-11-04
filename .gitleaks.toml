@@ -1,0 +1,6 @@
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Downloaded dependencies, local package caches and disposable generated scan reports"
+paths = ['''(^|/)(node_modules|\.cache|\.tooling|\.scratch)(/|$)''']

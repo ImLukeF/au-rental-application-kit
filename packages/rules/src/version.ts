@@ -1,0 +1,1 @@
+export const registryVersion = "sha256:7991df263ca498f5a344c8bea06f4ce29310dbefa2b9fc4c6e172af8e1b4b518";

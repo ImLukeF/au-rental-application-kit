@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "aurak.profile-backup.v1"
+    },
+    "kdf": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "const": "PBKDF2"
+        },
+        "hash": {
+          "type": "string",
+          "const": "SHA-256"
+        },
+        "iterations": {
+          "type": "number",
+          "const": 600000
+        },
+        "salt": {
+          "type": "string",
+          "minLength": 20,
+          "maxLength": 30
+        }
+      },
+      "required": [
+        "name",
+        "hash",
+        "iterations",
+        "salt"
+      ],
+      "additionalProperties": false
+    },
+    "iv": {
+      "type": "string",
+      "minLength": 16,
+      "maxLength": 16
+    },
+    "ct": {
+      "type": "string",
+      "minLength": 20
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "kdf",
+    "iv",
+    "ct"
+  ],
+  "additionalProperties": false
+}

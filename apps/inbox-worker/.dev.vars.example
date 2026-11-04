@@ -1,0 +1,6 @@
+# Copy to .dev.vars (git-ignored). Never commit real values.
+DATA_KEK_V1=REPLACE_WITH_OUTPUT_OF_gen-kek
+ACCESS_TEAM_DOMAIN=https://example.cloudflareaccess.com
+ACCESS_AUD=replace-me
+BOOTSTRAP_ADMIN_EMAIL=admin@example.com
+TURNSTILE_SECRET_KEY=

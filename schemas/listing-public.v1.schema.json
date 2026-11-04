@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "aurak.listing-public.v1"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z2-7]{12}$"
+    },
+    "jurisdiction": {
+      "type": "string",
+      "enum": [
+        "VIC",
+        "NSW"
+      ]
+    },
+    "formId": {
+      "type": "string",
+      "enum": [
+        "VIC-3A-2026-03-31",
+        "NSW-PROVISIONAL-2026-11-04"
+      ]
+    },
+    "provisional": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "open",
+        "closed_leased",
+        "closed_withdrawn"
+      ]
+    },
+    "item1": {
+      "type": "object",
+      "properties": {
+        "premisesAddress": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 200
+        }
+      },
+      "required": [
+        "premisesAddress"
+      ],
+      "additionalProperties": false
+    },
+    "item2": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "acnOrAbn": {
+          "type": "string",
+          "pattern": "^(?:\\d{9}|\\d{11})$"
+        },
+        "address": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "phone": {
+          "type": "string",
+          "pattern": "^(?:\\+61|0)[\\d ()-]{8,16}$"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+        },
+        "providerStateOrTerritory": {
+          "type": "string",
+          "enum": [
+            "VIC",
+            "NSW",
+            "QLD",
+            "SA",
+            "WA",
+            "TAS",
+            "NT",
+            "ACT",
+            "overseas"
+          ]
+        }
+      },
+      "required": [
+        "name",
+        "address",
+        "phone",
+        "email",
+        "providerStateOrTerritory"
+      ],
+      "additionalProperties": false
+    },
+    "financialRequested": {
+      "maxItems": 2,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "payslip",
+          "bank_statement_no_transactions",
+          "centrelink_statement_or_letter",
+          "bank_statement_transactions_redacted",
+          "rental_ledger",
+          "proof_of_savings",
+          "driver_licence",
+          "proof_of_age_card",
+          "medicare_card",
+          "australian_passport",
+          "foreign_passport_and_visa",
+          "birth_certificate",
+          "citizenship_certificate",
+          "tertiary_student_id",
+          "centrelink_card",
+          "dva_card",
+          "utilities_bill_current_address",
+          "government_letter_current_address",
+          "photo_card",
+          "student_id"
+        ]
+      }
+    },
+    "identityRequested": {
+      "maxItems": 2,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "payslip",
+          "bank_statement_no_transactions",
+          "centrelink_statement_or_letter",
+          "bank_statement_transactions_redacted",
+          "rental_ledger",
+          "proof_of_savings",
+          "driver_licence",
+          "proof_of_age_card",
+          "medicare_card",
+          "australian_passport",
+          "foreign_passport_and_visa",
+          "birth_certificate",
+          "citizenship_certificate",
+          "tertiary_student_id",
+          "centrelink_card",
+          "dva_card",
+          "utilities_bill_current_address",
+          "government_letter_current_address",
+          "photo_card",
+          "student_id"
+        ]
+      }
+    },
+    "identityStage": {
+      "type": "string",
+      "enum": [
+        "application",
+        "preferred"
+      ]
+    },
+    "maxFinancialDocs": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "refereesRequested": {
+      "type": "boolean"
+    },
+    "tenancyDatabases": {
+      "maxItems": 3,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 200
+          },
+          "phone": {
+            "type": "string",
+            "pattern": "^(?:\\+61|0)[\\d ()-]{8,16}$"
+          },
+          "webAddress": {
+            "type": "string",
+            "format": "uri"
+          }
+        },
+        "required": [
+          "name",
+          "phone",
+          "webAddress"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "collectionNoticeMd": {
+      "type": "string",
+      "minLength": 20,
+      "maxLength": 12000
+    },
+    "privacyPolicyUrl": {
+      "anyOf": [
+        {
+          "type": "string",
+          "format": "uri"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "retentionSummary": {
+      "type": "object",
+      "properties": {
+        "unsuccessfulDays": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 28
+        },
+        "successfulHandoffDays": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 90
+        }
+      },
+      "required": [
+        "unsuccessfulDays",
+        "successfulHandoffDays"
+      ],
+      "additionalProperties": false
+    },
+    "turnstileSiteKey": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "rulesVersion": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "slug",
+    "jurisdiction",
+    "formId",
+    "provisional",
+    "status",
+    "item1",
+    "item2",
+    "financialRequested",
+    "identityRequested",
+    "identityStage",
+    "maxFinancialDocs",
+    "refereesRequested",
+    "tenancyDatabases",
+    "collectionNoticeMd",
+    "privacyPolicyUrl",
+    "retentionSummary",
+    "turnstileSiteKey",
+    "rulesVersion"
+  ],
+  "additionalProperties": false
+}

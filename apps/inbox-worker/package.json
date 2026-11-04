@@ -1,0 +1,18 @@
+{
+  "name": "@aurak/inbox-worker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/assemble-assets.mjs && wrangler types && wrangler deploy --dry-run --outdir dist",
+    "dev": "wrangler dev --ip 127.0.0.1 --port 8787 --env development"
+  },
+  "dependencies": {
+    "@aurak/rules": "workspace:*",
+    "@aurak/forms": "workspace:*",
+    "@aurak/crypto": "workspace:*",
+    "hono": "^4.13.16",
+    "jose": "^6.2.15",
+    "zod": "^4.6.7"
+  }
+}
