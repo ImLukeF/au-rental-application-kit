@@ -1,0 +1,25 @@
+{
+  "name": "@aurak/renter",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build"
+  },
+  "dependencies": {
+    "@aurak/rules": "workspace:*",
+    "@aurak/forms": "workspace:*",
+    "@aurak/crypto": "workspace:*",
+    "@aurak/pdf": "workspace:*",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-router": "^7",
+    "idb": "^8.0.4",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "vite": "^8.3.5",
+    "@vitejs/plugin-react": "^6.2.1"
+  }
+}

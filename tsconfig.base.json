@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "ES2023",
+    "lib": ["ES2023", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true,
+    "jsx": "react-jsx",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["node", "vite/client"],
+    "paths": {
+      "@aurak/rules": ["./packages/rules/src/index.ts"],
+      "@aurak/forms": ["./packages/forms/src/index.ts"],
+      "@aurak/crypto": ["./packages/crypto/src/index.ts"],
+      "@aurak/pdf": ["./packages/pdf/src/index.ts"]
+    }
+  }
+}
