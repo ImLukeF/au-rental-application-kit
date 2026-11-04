@@ -10,7 +10,8 @@
       "!!pnpm-lock.yaml",
       "!!.scratch",
       "!!.cache",
-      "!!.tooling"
+      "!!.tooling",
+      "!!**/worker-configuration.d.ts"
     ]
   },
   "formatter": {
@@ -20,7 +21,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true,
+      "preset": "recommended",
       "style": {
         "noNonNullAssertion": "off"
       },

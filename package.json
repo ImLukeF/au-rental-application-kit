@@ -10,7 +10,7 @@
   "scripts": {
     "lint": "biome check .",
     "format": "biome check --write .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsc --noEmit && tsc -p apps/inbox-worker/tsconfig.test.json --noEmit",
     "test": "vitest run --maxWorkers=2 --no-file-parallelism",
     "build": "pnpm --filter @aurak/renter build && pnpm --filter @aurak/agent-ui build && pnpm --filter @aurak/inbox-worker build",
     "gen": "tsx scripts/gen.ts",

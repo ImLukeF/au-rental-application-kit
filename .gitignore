@@ -12,3 +12,4 @@ apps/inbox-worker/public/
 .tooling/
 .cache/
 .scratch/
+apps/inbox-worker/worker-configuration.d.ts
