@@ -1,4 +1,5 @@
 export type Jurisdiction = "VIC" | "NSW" | "CTH";
+export type ApplicationJurisdiction = Exclude<Jurisdiction, "CTH">;
 export type ISODate = `${number}-${number}-${number}`;
 export interface Citation {
   instrument: string;
@@ -62,7 +63,7 @@ export interface Violation {
   reason: string;
 }
 export interface ListingRequestInput {
-  jurisdiction: "VIC" | "NSW";
+  jurisdiction: ApplicationJurisdiction;
   financialRequested: string[];
   identityRequested: string[];
   identityStage: "application" | "preferred";
@@ -74,6 +75,7 @@ export interface ListingRequestInput {
 export type RetentionEvent =
   | { kind: "unsuccessful"; agreementDate: ISODate; vicOtherPremisesConsent: boolean }
   | { kind: "listing_withdrawn_no_agreement"; closedOn: ISODate }
+  | { kind: "decision_without_agreement"; decidedAt: string; successful: boolean }
   | { kind: "application_withdrawn"; withdrawnAt: string }
   | { kind: "successful"; agreementDate: ISODate; tenancyEndDate?: ISODate }
   | { kind: "identity_document"; uploadedAt: string; verifiedAt?: string; decidedAt?: string }

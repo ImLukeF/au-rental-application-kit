@@ -59,8 +59,8 @@ export function computeRetention(
         rule =
           event.vicOtherPremisesConsent && cfg.consentedRuleId ? cfg.consentedRuleId : cfg.unsuccessfulRuleId;
         legal = deadline(
-          event.vicOtherPremisesConsent
-            ? addMonths(event.agreementDate, ruleParameter(rule, "monthsAfterAgreement") ?? 0)
+          ruleParameter(rule, "monthsAfterAgreement") !== null
+            ? addMonths(event.agreementDate, ruleParameter(rule, "monthsAfterAgreement")!)
             : addDays(event.agreementDate, ruleParameter(rule, "daysAfterAgreement") ?? 0),
         );
         if (event.vicOtherPremisesConsent && policy.keepConsentedUnsuccessful) due = legal;
@@ -77,6 +77,12 @@ export function computeRetention(
       break;
     case "listing_withdrawn_no_agreement":
       due = deadline(addDays(event.closedOn, policy.listingWithdrawnDays));
+      break;
+    case "decision_without_agreement":
+      due = new Date(
+        new Date(event.decidedAt).getTime() +
+          (event.successful ? policy.successfulHandoffDays : policy.unsuccessfulDays) * 86400000,
+      ).toISOString();
       break;
     case "application_withdrawn":
       due = new Date(new Date(event.withdrawnAt).getTime() + policy.withdrawnDays * 86400000).toISOString();

@@ -137,3 +137,12 @@ describe("dated legal behavior", () => {
     ).toBe("2026-11-11T00:00:00.000Z");
   });
 });
+it("does not invent an agreement date for an earlier decision", () => {
+  expect(
+    computeRetention(
+      { kind: "decision_without_agreement", decidedAt: "2026-11-04T01:00:00.000Z", successful: false },
+      "VIC",
+      "2026-11-04",
+    ),
+  ).toMatchObject({ legalDeadline: null, policyDeadline: "2026-11-18T01:00:00.000Z" });
+});

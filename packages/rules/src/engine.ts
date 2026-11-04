@@ -1,6 +1,7 @@
 import { jurisdictionPolicy } from "./policies";
 import { activeRules, getRule } from "./registry";
 import type {
+  ApplicationJurisdiction,
   EngineOptions,
   FeeMatter,
   ISODate,
@@ -98,7 +99,7 @@ export function validateListingRequest(
 }
 export function canCollectIdentityDocuments(
   ctx: {
-    jurisdiction: "VIC" | "NSW";
+    jurisdiction: ApplicationJurisdiction;
     listingIdentityStage: "application" | "preferred";
     applicationStatus: string;
     intentNoticeRecordedAt?: string | null;
@@ -122,13 +123,16 @@ export function canCollectIdentityDocuments(
         reason: "Identity documents require preferred-applicant status and a prior written intent notice.",
       };
 }
-export function penaltyUnitValueAUD(j: "VIC" | "NSW", on: ISODate): { value: number; ruleId: string } | null {
+export function penaltyUnitValueAUD(
+  j: ApplicationJurisdiction,
+  on: ISODate,
+): { value: number; ruleId: string } | null {
   const r = activeRules(j, on).find((r) => r.id.includes("PENALTY_UNIT"));
   return r ? { value: r.params.valueAUD as number, ruleId: r.id } : null;
 }
 export function penaltyToAUD(
   p: Penalty,
-  j: "VIC" | "NSW",
+  j: ApplicationJurisdiction,
   on: ISODate,
 ): { individual?: number; bodyCorporate?: number } {
   const value = penaltyUnitValueAUD(j, on)?.value;
@@ -140,7 +144,7 @@ export function penaltyToAUD(
   return result;
 }
 export function evaluateFee(input: {
-  jurisdiction: "VIC" | "NSW";
+  jurisdiction: ApplicationJurisdiction;
   chargedBy: "third_party" | "agent" | "provider" | "adi";
   matter: FeeMatter;
   on: ISODate;
@@ -173,7 +177,7 @@ export function evaluateFee(input: {
 }
 export function requiredNotices(
   ctx: {
-    jurisdiction: "VIC" | "NSW";
+    jurisdiction: ApplicationJurisdiction;
     databaseListingFound?: boolean;
     dbCheckedAt?: string;
     collectingIdentity?: boolean;
