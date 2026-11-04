@@ -41,9 +41,10 @@ export function auditStatement(
   at: string,
   outcome: "ok" | "denied" | "error" = "ok",
   ruleId: string | null = null,
+  condition?: { sql: string; args: unknown[] },
 ) {
   return env.DB.prepare(
-    "INSERT INTO audit_events(id,at,actor_type,actor_id,action,target_type,target_id,rule_id,request_id,outcome) VALUES(?,?,?,?,?,?,?,?,?,?)",
+    `INSERT INTO audit_events(id,at,actor_type,actor_id,action,target_type,target_id,rule_id,request_id,outcome) ${condition ? `SELECT ?,?,?,?,?,?,?,?,?,? WHERE ${condition.sql}` : "VALUES(?,?,?,?,?,?,?,?,?,?)"}`,
   ).bind(
     crypto.randomUUID(),
     at,
@@ -55,6 +56,7 @@ export function auditStatement(
     ruleId,
     requestId,
     outcome,
+    ...(condition?.args ?? []),
   );
 }
 export async function audit(...args: Parameters<typeof auditStatement>) {

@@ -74,7 +74,13 @@ const settingsInput = z.strictObject({
   details: agencySchema,
   collectionNoticeMd: z.string().min(20).max(12000),
   privacyPolicyUrl: z.url().nullable(),
-  retentionPolicy: retentionPolicySchema,
+  retentionPolicy: retentionPolicySchema.extend({
+    unsuccessfulDays: z.number().int(),
+    successfulHandoffDays: z.number().int(),
+    withdrawnDays: z.number().int(),
+    listingWithdrawnDays: z.number().int(),
+    identityDocMaxDays: z.number().int(),
+  }),
   turnstileRequired: z.boolean(),
 });
 const submissionInput = z.strictObject({
@@ -742,7 +748,7 @@ export function createApp(deps: Dependencies = {}) {
     const row = await getApplication(c.env, c.req.param("id"));
     await audit(
       c.env,
-      "export_application_json",
+      c.req.query("format") === "pdf-data" ? "export_application_pdf_data" : "export_application_json",
       actor(c.get("staff")),
       "application",
       row.id,
@@ -851,6 +857,61 @@ export function createApp(deps: Dependencies = {}) {
         ),
       );
     }
+    const condition = {
+      sql: "EXISTS(SELECT 1 FROM applications WHERE id=? AND status=?)",
+      args: [row.id, row.status],
+    };
+    if (FINAL_STATES.includes(input.to)) {
+      const policy = await retentionPolicy(c.env);
+      const consent =
+        (
+          await c.env.DB.prepare(
+            "SELECT granted FROM consents WHERE application_id=? AND consent_id='vic_retain_for_other_premises@1' AND withdrawn_at IS NULL",
+          )
+            .bind(row.id)
+            .first<{ granted: number }>()
+        )?.granted === 1;
+      const event: RetentionEvent = !listing.agreement_date
+        ? { kind: "decision_without_agreement", decidedAt: timestamp, successful: input.to === "successful" }
+        : input.to === "successful"
+          ? { kind: "successful", agreementDate: listing.agreement_date as ISODate }
+          : {
+              kind: "unsuccessful",
+              agreementDate: listing.agreement_date as ISODate,
+              vicOtherPremisesConsent: consent,
+            };
+      const r = computeRetention(event, listing.jurisdiction, localToday(now()), {}, policy);
+      statements.push(
+        c.env.DB.prepare(
+          "UPDATE applications SET legal_deadline_at=?,purge_due_at=?,purge_rule_id=? WHERE id=? AND status=?",
+        ).bind(r.legalDeadline, r.policyDeadline, r.ruleIds[0]!, row.id, row.status),
+      );
+      statements.push(
+        c.env.DB.prepare(
+          `UPDATE documents SET legal_deadline_at=?,purge_due_at=MIN(purge_due_at,?) WHERE application_id=? AND category='financial' AND purged_at IS NULL AND ${condition.sql}`,
+        ).bind(r.legalDeadline, r.policyDeadline, row.id, ...condition.args),
+      );
+    }
+    if (input.to === "id_verified" || FINAL_STATES.includes(input.to))
+      statements.push(
+        c.env.DB.prepare(
+          `UPDATE documents SET purge_due_at=? WHERE application_id=? AND category='identity' AND purged_at IS NULL AND ${condition.sql}`,
+        ).bind(timestamp, row.id, ...condition.args),
+      );
+    statements.push(
+      auditStatement(
+        c.env,
+        "transition",
+        actor(c.get("staff")),
+        "application",
+        row.id,
+        c.get("requestId"),
+        timestamp,
+        "ok",
+        null,
+        condition,
+      ),
+    );
     statements.push(
       c.env.DB.prepare(
         "UPDATE applications SET status=?,status_changed_at=?,intent_notice_at=CASE WHEN ?='id_requested' THEN ? ELSE intent_notice_at END,id_requested_at=CASE WHEN ?='id_requested' THEN ? ELSE id_requested_at END,applicant_token_hash=COALESCE(?,applicant_token_hash),id_verified_at=CASE WHEN ?='id_verified' THEN ? ELSE id_verified_at END,id_verification_method=COALESCE(?,id_verification_method) WHERE id=? AND status=?",
@@ -872,44 +933,7 @@ export function createApp(deps: Dependencies = {}) {
     const results = await c.env.DB.batch(statements);
     if (!results[results.length - 1]!.meta.changes)
       throw new HttpError(409, "invalid_transition", { from: row.status, to: input.to });
-    await audit(
-      c.env,
-      "transition",
-      actor(c.get("staff")),
-      "application",
-      row.id,
-      c.get("requestId"),
-      timestamp,
-    );
-    if (FINAL_STATES.includes(input.to)) {
-      const consent =
-        (
-          await c.env.DB.prepare(
-            "SELECT granted FROM consents WHERE application_id=? AND consent_id='vic_retain_for_other_premises@1' AND withdrawn_at IS NULL",
-          )
-            .bind(row.id)
-            .first<{ granted: number }>()
-        )?.granted === 1;
-      await schedule(
-        c.env,
-        row,
-        input.to === "successful"
-          ? { kind: "successful", agreementDate: (listing.agreement_date ?? localToday(now())) as ISODate }
-          : {
-              kind: "unsuccessful",
-              agreementDate: (listing.agreement_date ?? localToday(now())) as ISODate,
-              vicOtherPremisesConsent: consent,
-            },
-        listing.jurisdiction,
-        now(),
-      );
-    }
     if (input.to === "id_verified" || FINAL_STATES.includes(input.to)) {
-      await c.env.DB.prepare(
-        "UPDATE documents SET purge_due_at=? WHERE application_id=? AND category='identity' AND purged_at IS NULL",
-      )
-        .bind(timestamp, row.id)
-        .run();
       for (const doc of await getDocuments(c.env, row.id))
         if (doc.category === "identity" && !doc.purged_at)
           await purgeDocument(c.env, { ...doc, purge_due_at: timestamp }, timestamp, c.get("requestId"));

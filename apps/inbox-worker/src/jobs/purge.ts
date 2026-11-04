@@ -79,7 +79,8 @@ export async function runPurge(
 ): Promise<{ count: number; errors: number }> {
   const at = now.toISOString();
   let count = 0,
-    errors = 0;
+    errors = 0,
+    late = 0;
   const apps = (
     await env.DB.prepare(
       "SELECT * FROM applications WHERE purged_at IS NULL AND purge_due_at<=? ORDER BY purge_due_at LIMIT 5",
@@ -89,7 +90,10 @@ export async function runPurge(
   ).results;
   for (const app of apps) {
     try {
-      if (await purgeApplication(env, app, at, requestId)) count++;
+      if (await purgeApplication(env, app, at, requestId)) {
+        count++;
+        if (app.legal_deadline_at && at > app.legal_deadline_at) late++;
+      }
     } catch {
       errors++;
       log({ type: "error", requestId, code: "purge_application_failed" });
@@ -104,12 +108,15 @@ export async function runPurge(
   ).results;
   for (const doc of docs) {
     try {
-      if (await purgeDocument(env, doc, at, requestId)) count++;
+      if (await purgeDocument(env, doc, at, requestId)) {
+        count++;
+        if (doc.legal_deadline_at && at > doc.legal_deadline_at) late++;
+      }
     } catch {
       errors++;
       log({ type: "error", requestId, code: "purge_document_failed" });
     }
   }
-  log({ type: "purge", requestId, count, late: 0 });
+  log({ type: "purge", requestId, count, late });
   return { count, errors };
 }

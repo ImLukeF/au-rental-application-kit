@@ -1,6 +1,15 @@
 import { createScheduledController } from "cloudflare:test";
 import { env, exports } from "cloudflare:workers";
-import { base64url, decrypt, encrypt, newDataKey, randomBytes, sha256 } from "@aurak/crypto";
+import {
+  base64url,
+  decrypt,
+  decryptBytes,
+  encrypt,
+  encryptBytes,
+  newDataKey,
+  randomBytes,
+  sha256,
+} from "@aurak/crypto";
 import { buildPayload, listingSchema, profileSchema } from "@aurak/forms";
 import { createLocalJWKSet, exportJWK, generateKeyPair, SignJWT } from "jose";
 import { describe, expect, it, vi } from "vitest";
@@ -10,7 +19,7 @@ import worker from "../src";
 import { createApp } from "../src/app";
 import { AccessAuthenticator } from "../src/auth/access";
 import { applicationKey, open, rewrapKeys } from "../src/crypto/envelope";
-import { canTransition, STATES, TRANSITIONS } from "../src/domain/stateMachine";
+import { canTransition, STATES } from "../src/domain/stateMachine";
 import type { Env } from "../src/env";
 import { runPurge } from "../src/jobs/purge";
 import { log } from "../src/log";
@@ -330,8 +339,28 @@ describe("inbox runtime security", () => {
     ).toBe(2);
   });
   it("exhaustively encodes every valid and invalid state edge", () => {
+    const expected = new Set([
+      "submitted:shortlisted",
+      "submitted:unsuccessful",
+      "submitted:withdrawn",
+      "shortlisted:preferred",
+      "shortlisted:unsuccessful",
+      "shortlisted:withdrawn",
+      "preferred:id_requested",
+      "preferred:unsuccessful",
+      "preferred:withdrawn",
+      "id_requested:id_verified",
+      "id_requested:unsuccessful",
+      "id_requested:withdrawn",
+      "id_verified:successful",
+      "id_verified:unsuccessful",
+      "id_verified:withdrawn",
+      "successful:purged",
+      "unsuccessful:purged",
+      "withdrawn:purged",
+    ]);
     for (const from of STATES)
-      for (const to of STATES) expect(canTransition(from, to)).toBe(TRANSITIONS[from].includes(to));
+      for (const to of STATES) expect(canTransition(from, to)).toBe(expected.has(`${from}:${to}`));
     expect(canTransition("submitted", "successful")).toBe(false);
     expect(canTransition("purged", "submitted")).toBe(false);
   });
@@ -394,7 +423,7 @@ describe("inbox runtime security", () => {
   it("closes leased listings with correct legal and policy deadlines", async () => {
     const winner = await submitted();
     const loserResponse = await submit(winner.listing),
-      loser = (await loserResponse.json()) as { applicationId: string };
+      loser = (await loserResponse.json()) as { applicationId: string; applicantToken: string };
     for (const to of ["shortlisted", "preferred"])
       expect((await move(winner.applicationId, to)).status).toBe(200);
     expect(
@@ -420,6 +449,20 @@ describe("inbox runtime security", () => {
     expect(await getApplication(runtime, loser.applicationId)).toMatchObject({
       status: "unsuccessful",
       legal_deadline_at: "2027-05-10T00:00:00.000Z",
+      purge_due_at: "2026-11-24T00:00:00.000Z",
+    });
+    expect(
+      (
+        await call(
+          `/api/applicant/applications/${loser.applicationId}/consents`,
+          "POST",
+          { id: "vic_retain_for_other_premises@1", granted: false },
+          { Authorization: `Bearer ${loser.applicantToken}` },
+        )
+      ).status,
+    ).toBe(200);
+    expect(await getApplication(runtime, loser.applicationId)).toMatchObject({
+      legal_deadline_at: "2026-12-10T00:00:00.000Z",
       purge_due_at: "2026-11-24T00:00:00.000Z",
     });
   });
@@ -600,4 +643,22 @@ it("keeps NSW identity out of submission and only uses injected Turnstile verifi
   );
   expect(response.status).toBe(403);
   expect(verifier.verify).toHaveBeenCalledWith("synthetic-fixture");
+});
+
+it("encrypts the maximum file-size boundary as bytes in workerd", async () => {
+  const key = await newDataKey();
+  const input = new Uint8Array(10 * 1024 * 1024).fill(7);
+  const sealed = await encryptBytes(key, input, "aurak:v1:fixture:doc:max");
+  expect(sealed.bytes.length).toBe(input.length + 16);
+  const plain = await decryptBytes(key, sealed, "aurak:v1:fixture:doc:max");
+  expect(plain.length).toBe(input.length);
+  expect(plain[plain.length - 1]).toBe(7);
+});
+it("atomically rolls back a status change if its mandatory audit write fails", async () => {
+  const data = await submitted();
+  await runtime.DB.exec(
+    "CREATE TRIGGER reject_transition_audit BEFORE INSERT ON audit_events WHEN NEW.action='transition' BEGIN SELECT RAISE(ABORT, 'synthetic_audit_failure'); END;",
+  );
+  expect((await move(data.applicationId, "shortlisted")).status).toBe(500);
+  expect((await getApplication(runtime, data.applicationId)).status).toBe("submitted");
 });
