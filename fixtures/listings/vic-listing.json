@@ -16,13 +16,8 @@
     "email": "agent@example.com",
     "providerStateOrTerritory": "VIC"
   },
-  "financialRequested": [
-    "payslip",
-    "bank_statement_no_transactions"
-  ],
-  "identityRequested": [
-    "driver_licence"
-  ],
+  "financialRequested": ["payslip", "bank_statement_no_transactions"],
+  "identityRequested": ["driver_licence"],
   "identityStage": "preferred",
   "maxFinancialDocs": 2,
   "refereesRequested": false,

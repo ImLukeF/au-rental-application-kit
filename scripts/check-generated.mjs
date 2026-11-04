@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, rm } from "node:fs/promises";
 
+await mkdir(".scratch", { recursive: true });
 const dir = await mkdtemp(".scratch/generated-");
 try {
   execFileSync("pnpm", ["gen", "--", dir], { stdio: "inherit" });

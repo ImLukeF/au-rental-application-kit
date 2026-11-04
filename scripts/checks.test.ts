@@ -1,5 +1,5 @@
 import { execFileSync } from "node:child_process";
-import { mkdtempSync, rmSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { describe, expect, it } from "vitest";
 // @ts-expect-error Plain ESM guard.
 import { denied } from "./check-deps.mjs";
@@ -8,6 +8,7 @@ import { violations } from "./check-placeholders.mjs";
 
 describe("public repository guards", () => {
   it("rejects a planted non-example email", () => {
+    mkdirSync(".scratch", { recursive: true });
     const dir = mkdtempSync(".scratch/guard-");
     try {
       writeFileSync(`${dir}/input.txt`, ["someone", "invalid.test"].join("@"));
@@ -29,4 +30,8 @@ describe("public repository guards", () => {
       "posthog-js",
     ]);
   });
+});
+it("generates one valid base64url encryption key without literal escape suffixes", () => {
+  const result = execFileSync("node", ["apps/inbox-worker/scripts/gen-kek.mjs"], { encoding: "utf8" });
+  expect(/^[A-Za-z0-9_-]{43}\n$/.test(result)).toBe(true);
 });

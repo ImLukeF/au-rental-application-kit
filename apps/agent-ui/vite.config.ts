@@ -1,6 +1,6 @@
-import { fontAssets } from "../../scripts/vite-fonts";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import { fontAssets } from "../../scripts/vite-fonts";
 export default defineConfig({
   plugins: [react(), fontAssets()],
   base: "/agent/",

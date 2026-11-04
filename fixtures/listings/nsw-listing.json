@@ -16,12 +16,8 @@
     "email": "agent@example.com",
     "providerStateOrTerritory": "NSW"
   },
-  "financialRequested": [
-    "proof_of_savings"
-  ],
-  "identityRequested": [
-    "driver_licence"
-  ],
+  "financialRequested": ["proof_of_savings"],
+  "identityRequested": ["driver_licence"],
   "identityStage": "preferred",
   "maxFinancialDocs": 1,
   "refereesRequested": false,
