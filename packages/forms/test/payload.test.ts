@@ -99,3 +99,19 @@ describe("minimised form payloads", () => {
     }
   });
 });
+it("contains no fields for the never-collected catalogue", async () => {
+  const { z } = await import("zod");
+  const scan = (schema: unknown) => {
+    if (!schema || typeof schema !== "object") return;
+    for (const [key, value] of Object.entries(schema)) {
+      if (key === "properties")
+        for (const name of Object.keys(value as object))
+          expect(name).not.toMatch(
+            /photo|selfie|social|marital|relationship|child|tattoo|religion|ethnic|gender|disab|tfn|taxFile|credit|bond(Claim|History)|tribunal|dispute/i,
+          );
+      scan(value);
+    }
+  };
+  scan(z.toJSONSchema(profileSchema));
+  scan(z.toJSONSchema(applicationSchema));
+});

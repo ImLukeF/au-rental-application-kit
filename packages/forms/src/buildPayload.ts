@@ -373,7 +373,14 @@ export function validatePayloadForListing(
     add("consents", "Duplicate consent receipts.");
   if (!payload.consents.some((c) => c.id === "share_with_agency@1" && c.granted))
     add("consents", "Sharing consent is required.");
-  if (listing.refereesRequested && !payload.consents.some((c) => c.id === "referee_contact@1" && c.granted))
+  if (
+    (listing.refereesRequested ||
+      (payload.jurisdiction === "VIC"
+        ? [payload.applicant.item8.property1, payload.applicant.item8.property2]
+        : [payload.applicant.nsw.rentalHistory.property1, payload.applicant.nsw.rentalHistory.property2]
+      ).some((h) => h?.providerName)) &&
+    !payload.consents.some((c) => c.id === "referee_contact@1" && c.granted)
+  )
     add("consents", "Reference consent is required.");
   if (
     listing.tenancyDatabases.length &&
